@@ -1,3 +1,5 @@
+/* eslint-disable functional/no-expression-statement */
+
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
