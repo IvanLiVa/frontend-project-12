@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout/MainLayout.jsx';
+import './styles/styles.css';
+import Login from './pages/LoginPage/LoginPage.jsx';
+import NotFound from './pages/NotFoundPage/NotFoundPage.jsx';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
-      <h1>Hello, World!!!!!!</h1>
-      <button type="button" onClick={() => setCount(count + 2)}>
-        count is {count}
-      </button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="login" element={<Login />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 };
 
