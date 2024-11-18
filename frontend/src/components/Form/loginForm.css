@@ -1,0 +1,10 @@
+.form {
+	width: 500px;
+	height: auto;
+
+  }
+ 
+ 
+ button {
+	width: 100%;  /* Растягивает кнопку на всю ширину */
+  }

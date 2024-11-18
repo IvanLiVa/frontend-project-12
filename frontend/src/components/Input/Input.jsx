@@ -1,13 +1,25 @@
 import React from 'react';
-import { Field, ErrorMessage as Error } from 'formik';
-import './Input.css';
+import { Field, ErrorMessage } from 'formik';
 
-const Input = ({ id, label, name, placeholder }) => {
+const Input = ({ label, name, id, placeholder, type = 'text', className }) => {
   return (
-    <div className="input-container">
-      <label htmlFor={id}>{label}</label>
-      <Field name={name} id={id} placeholder={placeholder} />
-      <Error name={name}>{(error) => <span>{error}</span>}</Error>
+    <div className="mb-3">
+      <div className="form-floating">
+        <Field
+          name={name}
+          id={id}
+          placeholder={placeholder}
+          type={type}
+          className={`form-control ${className}`}
+        />
+        <label htmlFor={id} className="form-label">
+          {label}
+        </label>
+      </div>
+
+      <ErrorMessage name={name}>
+        {(msg) => <div className="text-danger">{msg}</div>}
+      </ErrorMessage>
     </div>
   );
 };

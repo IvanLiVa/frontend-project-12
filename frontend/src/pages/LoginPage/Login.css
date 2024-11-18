@@ -3,6 +3,6 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	min-height: 100vh; /* Высота экрана */
-	background-color: #f4f4f4; /* Цвет фона */
+	height: 100%; 
+	background-color: #f4f4f4;
   }
