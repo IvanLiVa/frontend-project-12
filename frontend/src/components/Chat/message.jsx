@@ -1,4 +1,4 @@
- /* eslint-disable  functional/no-conditional-statement,  no-param-reassign,functional/no-expression-statement*/
+ /*  eslint-disable  functional/no-conditional-statement,  no-param-reassign,functional/no-expression-statement*/
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FormChat from './chatForm.jsx';
@@ -28,8 +28,10 @@ const MessageForm = () => {
       {/* Заголовок чата */}
       <div className="chat-header bg-light p-3 shadow-sm small">
         <p className="m-0">
-          <b># random</b>
+          {/* тут понятно канал  */}
+          <b># random</b>    
         </p>
+        {/* кол-во сообщений будет  */}
         <span className="text-muted">0 сообщений</span>
       </div>
 
