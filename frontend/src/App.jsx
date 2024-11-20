@@ -9,7 +9,6 @@ const App = () => {
   return (
     <Router>
       <RedirectToPage />
-
       <Routes>
         <Route path="/" element={<MainLayout />} />
         <Route path="login" element={<Login />} />
