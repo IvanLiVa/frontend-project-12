@@ -55,3 +55,8 @@ input {
   max-width: 100%;
   min-width: 100%;
 }
+
+#messages-box {
+  max-height: 500px;  /* Ограничиваем максимальную высоту */
+  overflow-y: auto;   /* Добавляем прокрутку по вертикали */
+}

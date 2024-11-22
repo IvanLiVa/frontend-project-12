@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setChannels } from '../../store/slices/channelsSlice.js';
+import { setChannels, setActiveChannelId } from '../../store/slices/channelsSlice.js';
 import getChannels from '../../Api/channels.js';
+import cn from 'classnames';
 
 const Channels = () => {
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
+  const activeChannelId = useSelector((state) => state.channels.activeChannelId);
   const token = useSelector((state) => state.auth.token);
 
+  // Получение каналов при наличии токена
   useEffect(() => {
     if (token) {
       getChannels(token)
@@ -16,7 +19,12 @@ const Channels = () => {
         })
         .catch((error) => console.error('Ошибка загрузки каналов:', error));
     }
-  }, []);
+  }, [token, dispatch]);
+
+  // Установка активного канала
+  const handleChannelClick = (id) => {
+    dispatch(setActiveChannelId(id)); // Устанавливаем активный канал в Redux
+  };
 
   return (
     <div className="col-2 bg-light p-3 border-end">
@@ -24,7 +32,14 @@ const Channels = () => {
       <ul className="nav flex-column">
         {channels.map((channel) => (
           <li key={channel.id} className="nav-item">
-            <button className="btn btn-link text-start w-100">
+            <button
+              className={cn('btn btn-link text-start w-100', {
+                active: activeChannelId === channel.id,
+                'fw-bold': activeChannelId === channel.id,
+                'text-decoration-underline': activeChannelId === channel.id,
+              })}
+              onClick={() => handleChannelClick(channel.id)}
+            >
               # {channel.name}
             </button>
           </li>

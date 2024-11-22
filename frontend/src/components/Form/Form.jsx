@@ -4,22 +4,19 @@ import './loginForm.css';
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import Input from '../Input/Input.jsx';
 import fetchDataLogin from '../../Api/auth.js';
-import { setAuthData } from '../../store/slices/authSlice.js';
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (values, { setFieldError }) => {
     fetchDataLogin(values.firstName, values.password)
       .then((data) => {
-        dispatch(
-          setAuthData({ token: data.token, username: values.firstName })
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ token: data.token, username: data.username })
         );
-        localStorage.setItem('token', data.token);
         navigate('/');
       })
       .catch((error) => {

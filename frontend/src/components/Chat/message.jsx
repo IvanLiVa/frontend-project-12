@@ -1,50 +1,83 @@
- /*  eslint-disable  functional/no-conditional-statement,  no-param-reassign,functional/no-expression-statement*/
+/*  eslint-disable  functional/no-conditional-statement,  no-param-reassign,functional/no-expression-statement*/
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FormChat from './chatForm.jsx';
 import { setMessages } from '../../store/slices/messagesSlice.js';
-import getMessages from '../../Api/messages.js';
+import { getMessages } from '../../Api/messages.js';
+import './chat.css';
+import { io } from 'socket.io-client';
+import { addMessage } from '../../store/slices/messagesSlice.js';
+
+const socket = io();
 
 const MessageForm = () => {
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token');
+  const token = useSelector((state) => state.auth.token);
   const messages = useSelector((state) => state.messages.messages);
+  const channels = useSelector((state) => state.channels.channels);
+  const activeChannelId = useSelector(
+    (state) => state.channels.activeChannelId
+  );
+  const messagesBoxRef = React.useRef(null);
+  const filteredMessages = messages.filter(
+    (message) => message.channelId === activeChannelId
+  );
+  const messageCount = filteredMessages.length;
 
   useEffect(() => {
     if (token) {
       getMessages(token)
         .then((data) => {
-          console.log('Полученные сообщения:', data);
           dispatch(setMessages(data));
         })
         .catch((error) => {
           console.error('Ошибка загрузки сообщений:', error);
         });
     }
-  }, [token, dispatch]);
+  }, [token]);
+
+  useEffect(() => {
+    if (messagesBoxRef.current) {
+      messagesBoxRef.current.scrollTop = messagesBoxRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    const handleNewMessage = (newMessage) => {
+      dispatch(addMessage(newMessage));
+      console.log( newMessage);
+    };
+
+    socket.on('newMessage', handleNewMessage);
+  }, [dispatch]);
+
+  const activeChannelMessages = messages.filter(
+    (message) => message.channelId === activeChannelId
+  );
+
+  const activeChannel = channels.find(
+    (channel) => channel.id === activeChannelId
+  );
 
   return (
     <div className="col d-flex flex-column">
-      {/* Заголовок чата */}
       <div className="chat-header bg-light p-3 shadow-sm small">
         <p className="m-0">
-          {/* тут понятно канал  */}
-          <b># random</b>    
+          <b># {activeChannel ? activeChannel.name : 'Выберите канал'}</b>
         </p>
-        {/* кол-во сообщений будет  */}
-        <span className="text-muted">0 сообщений</span>
+        <span className="text-muted">{`Собщений в чате: ${messageCount}`}</span>
       </div>
 
-      {/* Сообщения */}
       <div
         id="messages-box"
         className="chat-messages flex-grow-1 overflow-auto px-5"
+        ref={messagesBoxRef}
       >
-        {/* Отображаем сообщения */}
-        {messages.map((message) => (
+        {activeChannelMessages.map((message) => (
           <div key={message.id} className="message">
-            <p>{message.body}</p> {/* Выводим текст сообщения */}
-            <small>От: {message.username}</small>
+            <small>
+              {message.username}: {message.body}
+            </small>
           </div>
         ))}
       </div>

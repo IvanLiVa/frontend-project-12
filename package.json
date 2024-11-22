@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/IvanLiVa/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.4"
+    "@hexlet/chat-server": "^2.0.4",
+    "lodash": "^4.17.21",
+    "socket.io-client": "^4.8.1"
   }
 }
