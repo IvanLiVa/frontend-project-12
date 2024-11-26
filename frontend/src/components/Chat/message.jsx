@@ -5,10 +5,8 @@ import FormChat from './chatForm.jsx';
 import { setMessages } from '../../store/slices/messagesSlice.js';
 import { getMessages } from '../../Api/messages.js';
 import './chat.css';
-import { io } from 'socket.io-client';
+import SocketApi from '../../Api/socket.js';
 import { addMessage } from '../../store/slices/messagesSlice.js';
-
-const socket = io();
 
 const MessageForm = () => {
   const dispatch = useDispatch();
@@ -43,12 +41,8 @@ const MessageForm = () => {
   }, [messages]);
 
   useEffect(() => {
-    const handleNewMessage = (newMessage) => {
-      dispatch(addMessage(newMessage));
-      console.log( newMessage);
-    };
-
-    socket.on('newMessage', handleNewMessage);
+    SocketApi.createConnection();
+    SocketApi.onNewMessage(dispatch, addMessage);
   }, [dispatch]);
 
   const activeChannelMessages = messages.filter(

@@ -18,4 +18,18 @@ const addMessageApi = async (message, token) => {
   return response.data;
 };
 
-export { getMessages, addMessageApi };
+const sendMessage = async (messageText, channelId, username, token) => {
+  const message = {
+    body: messageText,
+    channelId,
+    username,
+  };
+
+  try {
+    return await addMessageApi(message, token);
+  } catch (error) {
+    console.error('Ошибка отправки сообщения:', error.message);
+  }
+};
+
+export { getMessages, sendMessage };

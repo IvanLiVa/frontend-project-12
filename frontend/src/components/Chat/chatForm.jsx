@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import sendMessage from '../../store/thunks/messagesThunks.js';
-
+import { sendMessage } from '../../Api/messages.js';
 
 const FormChat = () => {
   const [message, setMessage] = useState('');
@@ -13,17 +12,15 @@ const FormChat = () => {
   );
   const username = useSelector((state) => state.auth.username);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      dispatch(sendMessage(message, activeChannelId, username, token));
+      sendMessage(message, activeChannelId, username, token);
       setMessage('');
     } catch (error) {
       console.error('Ошибка при отправке сообщения:', error);
     }
-
   };
 
   return (
