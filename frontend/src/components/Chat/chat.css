@@ -57,6 +57,31 @@ input {
 }
 
 #messages-box {
-  max-height: 500px;  /* Ограничиваем максимальную высоту */
-  overflow-y: auto;   /* Добавляем прокрутку по вертикали */
+  max-height: 500px;  
+  overflow-y: auto;  
+}
+
+.btn-add-channel {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #007bff; 
+  border-radius: 10%;       
+  background-color: #ffffff; 
+  color: #007bff;         
+  cursor: pointer;       
+  transition: all 0.3s ease; 
+}
+
+.btn-add-channel:hover {
+  background-color: #007bff;
+  color: #ffffff;          
+}
+
+.btn-add-channel:active {
+  background-color: #0056b3; 
+  border-color: #0056b3;     
 }

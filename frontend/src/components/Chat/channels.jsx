@@ -1,16 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setChannels, setActiveChannelId } from '../../store/slices/channelsSlice.js';
-import getChannels from '../../Api/channels.js';
-import cn from 'classnames';
+import {
+  setChannels,
+  setActiveChannelId,
+} from '../../store/slices/channelsSlice.js';
+import { getChannels } from '../../Api/channels.js';
+import AddChannelModal from '../modals/addChannelModal.jsx';
+import ItemChannel from './ItemChannel';
+import SocketApi from '../../Api/socket.js';
+import {
+  addChannel,
+  updateChannel,
+  removeChannel,
+} from '../../store/slices/channelsSlice.js';
+import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
+import { useToggleModal } from '../../hooks/useAddChannelModal';
 
 const Channels = () => {
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
-  const activeChannelId = useSelector((state) => state.channels.activeChannelId);
+  const activeChannelId = useSelector(
+    (state) => state.channels.activeChannelId
+  );
   const token = useSelector((state) => state.auth.token);
 
-  // Получение каналов при наличии токена
+  const { showModal, openModal, closeModal } = useToggleModal();
+
   useEffect(() => {
     if (token) {
       getChannels(token)
@@ -18,34 +33,57 @@ const Channels = () => {
           dispatch(setChannels(data));
         })
         .catch((error) => console.error('Ошибка загрузки каналов:', error));
+
+      SocketApi.createConnection();
+
+      SocketApi.onNewChannel(dispatch, addChannel);
+      SocketApi.onRenameChannel(dispatch, updateChannel);
+      SocketApi.onRemoveChannel(
+        dispatch,
+        removeChannel,
+        removeMessagesByChannelId
+      );
+
+      return () => {
+        if (SocketApi.socket) {
+          SocketApi.socket.disconnect();
+        }
+      };
     }
   }, [token, dispatch]);
 
-  // Установка активного канала
   const handleChannelClick = (id) => {
-    dispatch(setActiveChannelId(id)); // Устанавливаем активный канал в Redux
+    dispatch(setActiveChannelId(id));
   };
 
   return (
-    <div className="col-2 bg-light p-3 border-end">
-      <b>Каналы</b>
-      <ul className="nav flex-column">
-        {channels.map((channel) => (
-          <li key={channel.id} className="nav-item">
-            <button
-              className={cn('btn btn-link text-start w-100', {
-                active: activeChannelId === channel.id,
-                'fw-bold': activeChannelId === channel.id,
-                'text-decoration-underline': activeChannelId === channel.id,
-              })}
-              onClick={() => handleChannelClick(channel.id)}
-            >
-              # {channel.name}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="col-2 bg-light p-3 border-end">
+        <div className="d-flex align-items-center mb-3">
+          <b className="me-auto">Каналы</b>
+          <button
+            type="button"
+            className="btn btn-sm btn-add-channel"
+            onClick={openModal}
+          >
+            +
+          </button>
+        </div>
+        <ul className="nav flex-column">
+          {channels.map((channel) => (
+            <ItemChannel
+              key={channel.id}
+              channel={channel}
+              isActive={activeChannelId === channel.id}
+              onClick={handleChannelClick}
+            />
+          ))}
+        </ul>
+      </div>
+      {showModal && (
+        <AddChannelModal showModal={showModal} handleClose={closeModal} />
+      )}
+    </>
   );
 };
 

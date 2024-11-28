@@ -1,11 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { sendMessage } from '../../Api/messages.js';
 
 const FormChat = () => {
   const [message, setMessage] = useState('');
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const activeChannelId = useSelector(
     (state) => state.channels.activeChannelId

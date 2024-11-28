@@ -18,8 +18,27 @@ class SocketApi {
   }
   onNewMessage(dispatch, addMessageAction) {
     this.socket.on('newMessage', (message) => {
-      console.log('New message received:', message);
       dispatch(addMessageAction(message));
+    });
+  }
+
+  onNewChannel(dispatch, addChannelAction) {
+    this.socket.on('newChannel', (channelName) => {
+      dispatch(addChannelAction(channelName));
+    });
+  }
+  onRenameChannel(dispatch, renameChannelAction) {
+    this.socket.on('renameChannel', (payload) => {
+      console.log(payload);
+      dispatch(renameChannelAction(payload));
+    });
+  }
+  
+  onRemoveChannel(dispatch, removeChannel, removeMessagesByChannelId) {
+    this.socket.on('removeChannel', (payload) => {
+      const { id } = payload;
+      dispatch(removeChannel(id));
+      dispatch(removeMessagesByChannelId(id));
     });
   }
 }
