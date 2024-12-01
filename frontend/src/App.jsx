@@ -3,17 +3,27 @@ import MainLayout from './layouts/MainLayout/MainLayout.jsx';
 import './styles/styles.css';
 import Login from './pages/LoginPage/LoginPage.jsx';
 import NotFound from './pages/NotFoundPage/NotFoundPage.jsx';
-import RedirectToPage from './components/RedirectToPage';
 import useConnectSocket from './hooks/useConnectSocket.js';
+import Signup from './pages/signup/Signup.jsx';
+import ProtectedRoute from './pages/ProtectedRoute.jsx';
+import NavbarChat from './components/Chat/navbar.jsx';
 
 const App = () => {
   useConnectSocket();
   return (
     <Router>
-      <RedirectToPage />
+      <NavbarChat />
       <Routes>
-        <Route path="/" element={<MainLayout />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        />
         <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

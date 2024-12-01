@@ -21,9 +21,6 @@ input {
   width: 100%; 
 }
 
-.navbar {
-  background-color: #f8f9fa; /
-}
 
 .main-chat-container {
   display: flex;

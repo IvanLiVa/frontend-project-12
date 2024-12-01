@@ -5,11 +5,11 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import Input from '../Input/Input.jsx';
-import fetchDataLogin from '../../Api/auth.js';
+import { fetchDataLogin } from '../../Api/auth.js';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate = useNavigate();
-
   const handleSubmit = (values, { setFieldError }) => {
     fetchDataLogin(values.firstName, values.password)
       .then((data) => {
@@ -44,7 +44,7 @@ const LoginForm = () => {
             name="password"
             id="password"
             placeholder="Введите пароль"
-            type="password"
+            type="password"ы
           />
 
           {errors.general && (
@@ -54,6 +54,12 @@ const LoginForm = () => {
           <button type="submit" className="btn btn-primary">
             Войти
           </button>
+          <div className="mt-3 text-center">
+            <span>Нет аккаунта? </span>
+            <Link to="/signup" className="text-decoration-none">
+              Регистрация
+            </Link>
+          </div>
         </Form>
       )}
     </Formik>
