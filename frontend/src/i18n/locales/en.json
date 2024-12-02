@@ -1,0 +1,38 @@
+{
+  "login": {
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Enter username",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter password",
+    "submit": "Login",
+    "noAccount": "No account?",
+    "signupLink": "Sign up",
+    "errors": {
+      "invalidCredentials": "Invalid username or password."
+    }
+  },
+  "signup": {
+    "username": "Username",
+    "usernamePlaceholder": "Enter username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "submit": "Sign up"
+  },
+  "validation": {
+    "username": "Username must be between 3 and 20 characters",
+    "password": "Password must be at least 6 characters",
+    "passwordMatch": "Passwords must match",
+    "required": "This field is required",
+    "userExists": "A user with this username already exists.",
+    "creationError": "Error creating user."
+  },
+  "text": {
+    "not_found": "404 - Page Not Found",
+    "channels": "Channels",
+    "messageCount": "Messages in chat:",
+    "newMessagePlaceholder": "Enter a message...",
+    "sendButton": "Send"
+  }
+}

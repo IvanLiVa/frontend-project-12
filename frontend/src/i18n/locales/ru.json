@@ -1,0 +1,38 @@
+{
+  "login": {
+    "usernameLabel": "Имя пользователя",
+    "usernamePlaceholder": "Введите имя пользователя",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "submit": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "signupLink": "Регистрация",
+    "errors": {
+      "invalidCredentials": "Неверные имя пользователя или пароль."
+    }
+  },
+  "signup": {
+    "username": "Имя пользователя",
+    "usernamePlaceholder": "Введите имя пользователя",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "confirmPasswordPlaceholder": "Подтвердите пароль",
+    "submit": "Зарегистрироваться"
+  },
+  "validation": {
+    "username": "Имя должно содержать от 3 до 20 символов",
+    "password": "Пароль должен быть не менее 6 символов",
+    "passwordMatch": "Пароли должны совпадать",
+    "required": "Поле обязательно для заполнения",
+    "userExists": "Пользователь с таким логином уже существует.",
+    "creationError": "Ошибка при создании пользователя."
+  },
+  "text": {
+    "not_found": "404 - Страница не найдена",
+    "channels": "Каналы",
+    "messageCount": "Сообщений в чате:",
+    "newMessagePlaceholder": "Введите сообщение...",
+    "sendButton": "Отправить"
+  }
+}

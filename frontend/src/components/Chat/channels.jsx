@@ -15,8 +15,10 @@ import {
 } from '../../store/slices/channelsSlice.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import { useToggleModal } from '../../hooks/useAddChannelModal';
+import { useTranslation } from 'react-i18next';
 
 const Channels = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
   const activeChannelId = useSelector(
@@ -60,7 +62,7 @@ const Channels = () => {
     <>
       <div className="col-2 bg-light p-3 border-end">
         <div className="d-flex align-items-center mb-3">
-          <b className="me-auto">Каналы</b>
+          <b className="me-auto">{t('text.channels')}</b>
           <button
             type="button"
             className="btn btn-sm btn-add-channel"

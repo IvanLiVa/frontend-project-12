@@ -7,8 +7,10 @@ import { getMessages } from '../../Api/messages.js';
 import './chat.css';
 import SocketApi from '../../Api/socket.js';
 import { addMessage } from '../../store/slices/messagesSlice.js';
+import { useTranslation } from 'react-i18next';
 
 const MessageForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const messages = useSelector((state) => state.messages.messages);
@@ -59,7 +61,9 @@ const MessageForm = () => {
         <p className="m-0">
           <b># {activeChannel ? activeChannel.name : 'Выберите канал'}</b>
         </p>
-        <span className="text-muted">{`Собщений в чате: ${messageCount}`}</span>
+        <span className="text-muted">
+          {t('text.messageCount')} {messageCount}
+        </span>
       </div>
 
       <div
@@ -75,8 +79,6 @@ const MessageForm = () => {
           </div>
         ))}
       </div>
-
-      {/* Форма ввода */}
       <FormChat />
     </div>
   );

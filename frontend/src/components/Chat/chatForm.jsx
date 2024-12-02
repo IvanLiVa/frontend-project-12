@@ -2,8 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { sendMessage } from '../../Api/messages.js';
+import { useTranslation } from 'react-i18next';
 
 const FormChat = () => {
+  const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const token = useSelector((state) => state.auth.token);
   const activeChannelId = useSelector(
@@ -25,17 +27,21 @@ const FormChat = () => {
   return (
     <div className="mt-auto px-5 py-3">
       <form className="py-1 border rounded-2" onSubmit={handleSubmit}>
-        <div className="input-group has-validation">
+        <div className="d-flex w-100">
           <input
             name="body"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            aria-label="Новое сообщение"
-            placeholder="Введите сообщение..."
-            className="border-0 p-0 ps-2 form-control"
+            aria-label={t('text.newMessagePlaceholder')}
+            placeholder={t('text.newMessagePlaceholder')}
+            className="border-0 p-0 ps-2 form-control flex-grow-1"
           />
-          <button type="submit" className="btn btn-group-vertical">
-            Отправить
+          <button
+            type="submit"
+            className="btn btn-outline-primary ms-2"
+            style={{ width: '20%' }}
+          >
+            {t('text.sendButton')}
           </button>
         </div>
       </form>

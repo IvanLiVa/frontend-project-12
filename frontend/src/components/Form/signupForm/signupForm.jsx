@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import Input from '../../Input/Input.jsx';
 import './signupForm.css';
 import { addUser } from '../../../Api/auth.js';
@@ -12,21 +13,22 @@ const initialValues = {
   confirmPass: '',
 };
 
-const validationSchema = Yup.object({
-  firstName: Yup.string()
-    .min(3, 'Имя должно содержать от 3 до 20 символов')
-    .max(20, 'Имя должно содержать от 3 до 20 символов')
-    .required('Имя обязательно'),
-  password: Yup.string()
-    .min(6, 'Пароль должен быть не менее 6 символов')
-    .required('Пароль обязателен'),
-  confirmPass: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
-    .required('Подтверждение пароля обязательно'),
-});
-
 const SignupForm = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const validationSchema = Yup.object({
+    firstName: Yup.string()
+      .min(3, t('validation.username'))
+      .max(20, t('validation.username'))
+      .required(t('validation.required')),
+    password: Yup.string()
+      .min(6, t('validation.password'))
+      .required(t('validation.required')),
+    confirmPass: Yup.string()
+      .oneOf([Yup.ref('password'), null], t('validation.passwordMatch'))
+      .required(t('validation.required')),
+  });
 
   const handleSubmit = async (values, { setFieldError }) => {
     try {
@@ -35,9 +37,10 @@ const SignupForm = () => {
       localStorage.setItem('user', JSON.stringify({ token, username }));
       navigate('/');
     } catch (error) {
-      setFieldError('general', error.message);
+      setFieldError('general', t('validation.userExists'));
     }
   };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -47,25 +50,25 @@ const SignupForm = () => {
       {({ errors }) => (
         <Form className="form p-5 border rounded shadow-sm mt-5">
           <Input
-            label="Имя пользователя"
+            labelKey="signup.username"
             name="firstName"
             id="firstName"
-            placeholder="Введите имя"
+            placeholderKey="signup.usernamePlaceholder"
           />
 
           <Input
-            label="Пароль"
+            labelKey="signup.password"
             name="password"
             id="password"
-            placeholder="Введите пароль"
+            placeholderKey="signup.passwordPlaceholder"
             type="password"
           />
 
           <Input
-            label="Подтвердите пароль"
+            labelKey="signup.confirmPassword"
             name="confirmPass"
             id="confirmPass"
-            placeholder="Подтвердите пароль"
+            placeholderKey="signup.confirmPasswordPlaceholder"
             type="password"
           />
 
@@ -74,7 +77,7 @@ const SignupForm = () => {
           )}
 
           <button type="submit" className="btn btn-primary">
-            Зарегистрироваться
+            {t('signup.submit')}
           </button>
         </Form>
       )}

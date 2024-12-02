@@ -4,12 +4,15 @@ import './loginForm.css';
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Input from '../Input/Input.jsx';
 import { fetchDataLogin } from '../../Api/auth.js';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const handleSubmit = (values, { setFieldError }) => {
     fetchDataLogin(values.firstName, values.password)
       .then((data) => {
@@ -21,7 +24,7 @@ const LoginForm = () => {
       })
       .catch((error) => {
         console.error('Ошибка авторизации:', error);
-        setFieldError('general', 'Неверные имя пользователя или пароль.');
+        setFieldError('general', t('login.errors.invalidCredentials'));
       });
   };
 
@@ -33,18 +36,18 @@ const LoginForm = () => {
       {({ errors }) => (
         <Form className="form p-5 border rounded shadow-sm mt-5">
           <Input
-            label="Имя Пользователя"
+            labelKey="login.usernameLabel"
             name="firstName"
             id="firstName"
-            placeholder="Ваш ник"
+            placeholderKey="login.usernamePlaceholder"
           />
 
           <Input
-            label="Пароль"
+            labelKey="login.passwordLabel"
             name="password"
             id="password"
-            placeholder="Введите пароль"
-            type="password"ы
+            placeholderKey="login.passwordPlaceholder"
+            type="password"
           />
 
           {errors.general && (
@@ -52,12 +55,12 @@ const LoginForm = () => {
           )}
 
           <button type="submit" className="btn btn-primary">
-            Войти
+            {t('login.submit')}
           </button>
           <div className="mt-3 text-center">
-            <span>Нет аккаунта? </span>
+            <span>{t('login.noAccount')} </span>
             <Link to="/signup" className="text-decoration-none">
-              Регистрация
+              {t('login.signupLink')}
             </Link>
           </div>
         </Form>
