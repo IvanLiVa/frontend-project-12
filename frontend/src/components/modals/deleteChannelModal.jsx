@@ -12,7 +12,6 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
     try {
       await deleteChannelApi(channelId, token);
       handleClose();
-      toast.success(t('toast.channel_renamed_success'));
     } catch (error) {
       console.error('Ошибка при удалении канала:', error);
     } finally {
