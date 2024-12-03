@@ -7,6 +7,7 @@ class SocketApi {
   }
   createConnection(t) {
     this.socket = io();
+   
 
     this.socket.on('connect', () => {
       console.log('connect');
@@ -22,35 +23,25 @@ class SocketApi {
     });
   }
 
-  onNewChannel = (
-    dispatch,
-    addChannelAction,
-    t,
-    currentUserId,
-    setCreatedByUser
-  ) => {
-    dispatch(setCreatedByUser(currentUserId));
-    this.socket.on('newChannel', (channel) => {
-      channel.createdBy = currentUserId;
-      console.log(currentUserId)
-      dispatch(addChannelAction(channel));
-      toast.success(t('toast.channel_created_success'));
+  onNewChannel(dispatch, addChannelAction,t) {
+    this.socket.on('newChannel', (channelName) => {
+      dispatch(addChannelAction(channelName));
+      toast.success(t('toast.channel_created_success')); 
     });
-  };
-  
-  onRenameChannel(dispatch, renameChannelAction) {
+  }
+  onRenameChannel(dispatch, renameChannelAction,t) {
     this.socket.on('renameChannel', (payload) => {
       dispatch(renameChannelAction(payload));
-      toast.success(t('toast.channel_renamed_success'));
+      toast.success(t('toast.channel_renamed_success')); 
     });
   }
 
-  onRemoveChannel(dispatch, removeChannel, removeMessagesByChannelId, t) {
+  onRemoveChannel(dispatch, removeChannel, removeMessagesByChannelId,t) {
     this.socket.on('removeChannel', (payload) => {
       const { id } = payload;
       dispatch(removeChannel(id));
-      toast.success(t('toast.channel_removed_success'));
       dispatch(removeMessagesByChannelId(id));
+      toast.success(t('toast.channel_removed_success'));
     });
   }
 }
