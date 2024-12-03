@@ -10,7 +10,6 @@ const AddChannelModal = ({ showModal, handleClose }) => {
   const channels = useSelector((state) => state.channels.channels);
 
   const [isDuplicate, setIsDuplicate] = useState(false);
-  const [containsProfanity, setContainsProfanity] = useState(false);
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -36,17 +35,14 @@ const AddChannelModal = ({ showModal, handleClose }) => {
         setIsDuplicate(true);
         return;
       }
-      const filteredName = leoProfanity.clean(name);
-      if (filteredName !== name) {
-        setContainsProfanity(true);
-        return;
-      }
 
       setIsDuplicate(false);
-      setContainsProfanity(false);
+
+      // Очистить имя канала от неприемлемых слов
+      const filteredName = leoProfanity.clean(name);
 
       try {
-        await addChannelApi({ name }, token);
+        await addChannelApi({ name: filteredName }, token);
         formik.resetForm();
         handleClose();
       } catch (error) {
@@ -87,7 +83,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                     type="text"
                     id="name"
                     name="name"
-                    className={`form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''} ${isDuplicate ? 'is-invalid' : ''} ${containsProfanity ? 'is-invalid' : ''}`}
+                    className={`form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''} ${isDuplicate ? 'is-invalid' : ''}`}
                     value={formik.values.name}
                     onChange={(e) => {
                       formik.handleChange(e);
@@ -99,8 +95,6 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                           name.toLowerCase()
                       );
                       setIsDuplicate(duplicateFound);
-                      const filteredName = leoProfanity.clean(name);
-                      setContainsProfanity(filteredName !== name);
                     }}
                     onBlur={formik.handleBlur}
                     placeholder="Введите название канала"
@@ -111,11 +105,6 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                   {isDuplicate && (
                     <div className="invalid-feedback">
                       Канал с таким именем уже существует.
-                    </div>
-                  )}
-                  {containsProfanity && (
-                    <div className="invalid-feedback">
-                      Имя канала содержит неприемлемые слова.
                     </div>
                   )}
                 </div>
@@ -131,7 +120,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    disabled={isDuplicate || containsProfanity}
+                    disabled={isDuplicate}
                   >
                     Отправить
                   </button>
