@@ -1,14 +1,8 @@
 import React from 'react';
 import { deleteChannelApi } from '../../Api/channels.js';
 import { useSelector } from 'react-redux';
-import { getChannels } from '../../Api/channels.js';
 
-const DeleteChannelModal = ({
-  showModal,
-  handleClose,
-  channelName,
-  channelId,
-}) => {
+const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
   const token = useSelector((state) => state.auth.token);
 
   const handleDeleteClick = async () => {
@@ -34,21 +28,21 @@ const DeleteChannelModal = ({
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Удалить канал</h5>
+              <div className="modal-title h4">Удалить канал</div>
               <button
                 type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
                 aria-label="Close"
+                className="btn btn-close"
+                data-bs-dismiss="modal"
                 onClick={handleClose}
               ></button>
             </div>
             <div className="modal-body">
-              <p>Уверены ?</p>
+              <p className="lead">Уверены?</p>
               <div className="d-flex justify-content-end">
                 <button
                   type="button"
-                  className="btn btn-secondary me-2"
+                  className="me-2 btn btn-secondary"
                   onClick={handleClose}
                 >
                   Отменить
