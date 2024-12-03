@@ -43,7 +43,6 @@ class SocketApi {
       const { id } = payload;
       dispatch(removeChannel(id));
       dispatch(removeMessagesByChannelId(id));
-      toast.success(t('toast.channel_removed_success'));
     });
   }
 }
