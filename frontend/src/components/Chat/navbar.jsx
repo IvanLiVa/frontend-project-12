@@ -28,7 +28,10 @@ const NavbarChat = () => {
         </button>
         <div className="d-flex align-items-center ml-auto">
           {user.token && (
-            <button className="btn btn-danger me-2" onClick={handleLogout}>
+            <button
+              className="btn btn-outline-primary me-2"
+              onClick={handleLogout}
+            >
               {t('signup.logout')}
             </button>
           )}
