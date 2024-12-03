@@ -33,7 +33,7 @@
     "not_found": "404 - Страница не найдена",
     "channels": "Каналы",
     "messageCount": "Сообщений в чате:",
-    "newMessagePlaceholder": "Введите сообщение...",
+    "newMessagePlaceholder": "Новое сообщение",
     "sendButton": "Отправить"
   },
   "toast": {
