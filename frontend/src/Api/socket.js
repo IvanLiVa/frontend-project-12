@@ -34,6 +34,7 @@ class SocketApi {
   onRenameChannel(dispatch, renameChannelAction,t) {
     this.socket.on('renameChannel', (payload) => {
       dispatch(renameChannelAction(payload));
+      toast.success(t('toast.channel_renamed_success'));
     });
   }
 
