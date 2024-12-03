@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { deleteChannelApi } from '../../Api/channels.js';
 import { useSelector } from 'react-redux';
 
-
 const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
+  const [isDeleting, setIsDeleting] = useState(false);
   const token = useSelector((state) => state.auth.token);
 
   const handleDeleteClick = async () => {
+    setIsDeleting(true);
+
     try {
       await deleteChannelApi(channelId, token);
       handleClose();
     } catch (error) {
       console.error('Ошибка при удалении канала:', error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -44,6 +48,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
                   type="button"
                   className="me-2 btn btn-secondary"
                   onClick={handleClose}
+                  disabled={isDeleting}
                 >
                   Отменить
                 </button>
@@ -51,8 +56,9 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
                   type="button"
                   className="btn btn-danger"
                   onClick={handleDeleteClick}
+                  disabled={isDeleting}
                 >
-                  Удалить
+                  {isDeleting ? 'Удаление...' : 'Удалить'}
                 </button>
               </div>
             </div>
