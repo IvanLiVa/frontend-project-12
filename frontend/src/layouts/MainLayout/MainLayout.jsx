@@ -4,7 +4,7 @@ import Chat from '../../components/Chat/chat.jsx';
 
 const MainLayout = () => {
   return (
-    <div className="main-layout">
+    <div className=" container main-layout">
       <main>
         <Chat />
       </main>

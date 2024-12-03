@@ -14,21 +14,23 @@ const App = () => {
   useConnectSocket();
   return (
     <Router>
-      <NavbarChat />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <MainLayout />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <CustomToastContainer />
+      <div className="d-flex flex-column h-100">
+        <NavbarChat />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <MainLayout />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <CustomToastContainer />
+      </div>
     </Router>
   );
 };

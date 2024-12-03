@@ -3,12 +3,14 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import { addChannelApi } from '../../Api/channels.js';
+import leoProfanity from 'leo-profanity';
 
 const AddChannelModal = ({ showModal, handleClose }) => {
   const token = useSelector((state) => state.auth.token);
   const channels = useSelector((state) => state.channels.channels);
 
   const [isDuplicate, setIsDuplicate] = useState(false);
+  const [containsProfanity, setContainsProfanity] = useState(false);
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -23,21 +25,28 @@ const AddChannelModal = ({ showModal, handleClose }) => {
     },
     validationSchema,
     onSubmit: async (values) => {
+      const { name } = values;
+
       const isDuplicate = channels.some(
         (channelItem) =>
-          channelItem.name.trim().toLowerCase() ===
-          values.name.trim().toLowerCase()
+          channelItem.name.trim().toLowerCase() === name.trim().toLowerCase()
       );
 
       if (isDuplicate) {
         setIsDuplicate(true);
         return;
       }
+      const filteredName = leoProfanity.clean(name);
+      if (filteredName !== name) {
+        setContainsProfanity(true);
+        return;
+      }
 
       setIsDuplicate(false);
+      setContainsProfanity(false);
 
       try {
-        await addChannelApi({ name: values.name }, token);
+        await addChannelApi({ name }, token);
         formik.resetForm();
         handleClose();
       } catch (error) {
@@ -78,7 +87,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                     type="text"
                     id="name"
                     name="name"
-                    className={`form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''} ${isDuplicate ? 'is-invalid' : ''}`}
+                    className={`form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''} ${isDuplicate ? 'is-invalid' : ''} ${containsProfanity ? 'is-invalid' : ''}`}
                     value={formik.values.name}
                     onChange={(e) => {
                       formik.handleChange(e);
@@ -90,6 +99,8 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                           name.toLowerCase()
                       );
                       setIsDuplicate(duplicateFound);
+                      const filteredName = leoProfanity.clean(name);
+                      setContainsProfanity(filteredName !== name);
                     }}
                     onBlur={formik.handleBlur}
                     placeholder="Введите название канала"
@@ -100,6 +111,11 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                   {isDuplicate && (
                     <div className="invalid-feedback">
                       Канал с таким именем уже существует.
+                    </div>
+                  )}
+                  {containsProfanity && (
+                    <div className="invalid-feedback">
+                      Имя канала содержит неприемлемые слова.
                     </div>
                   )}
                 </div>
@@ -115,7 +131,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    disabled={isDuplicate}
+                    disabled={isDuplicate || containsProfanity}
                   >
                     Отправить
                   </button>

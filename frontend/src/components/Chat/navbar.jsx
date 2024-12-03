@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../../store/slices/authSlice.js';
 import LanguageSwitcher from '../ languageSwitcher.jsx';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 
 const NavbarChat = () => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ const NavbarChat = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm w-100">
       <div className="container">
         <button
           className="navbar-brand btn btn-link"
