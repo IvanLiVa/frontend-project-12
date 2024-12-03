@@ -9,8 +9,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
   const handleDeleteClick = async () => {
     try {
       await deleteChannelApi(channelId, token);
-      
-
+      toast.success('Канал удалён');
       handleClose();
     } catch (error) {
       console.error('Ошибка при удалении канала:', error);
