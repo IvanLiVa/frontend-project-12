@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { deleteChannelApi } from '../../Api/channels.js';
 import { useSelector } from 'react-redux';
-
+import { toast } from 'react-bootstrap';
 const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const token = useSelector((state) => state.auth.token);
@@ -12,6 +12,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
     try {
       await deleteChannelApi(channelId, token);
       handleClose();
+      toast.success(t('toast.channel_renamed_success'));
     } catch (error) {
       console.error('Ошибка при удалении канала:', error);
     } finally {
