@@ -42,8 +42,8 @@ class SocketApi {
     this.socket.on('removeChannel', (payload) => {
       const { id } = payload;
       dispatch(removeChannel(id));
-      dispatch(removeMessagesByChannelId(id));
       toast.success(t('toast.channel_removed_success'));
+      dispatch(removeMessagesByChannelId(id));
     });
   }
 }
