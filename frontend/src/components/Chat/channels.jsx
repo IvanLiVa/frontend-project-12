@@ -12,6 +12,7 @@ import {
   addChannel,
   updateChannel,
   removeChannel,
+  setCreatedByUser,
 } from '../../store/slices/channelsSlice.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import { useToggleModal } from '../../hooks/useAddChannelModal';
@@ -25,7 +26,7 @@ const Channels = () => {
     (state) => state.channels.activeChannelId
   );
   const token = useSelector((state) => state.auth.token);
-
+  const currentUser = useSelector((state) => state.auth.username);
   const { showModal, openModal, closeModal } = useToggleModal();
 
   useEffect(() => {
@@ -41,8 +42,15 @@ const Channels = () => {
 
       SocketApi.createConnection(t);
 
-      SocketApi.onNewChannel(dispatch, addChannel, t);
-      SocketApi.onRenameChannel(dispatch, updateChannel, t);
+      SocketApi.onNewChannel(
+        dispatch,
+        addChannel,
+        t,
+        currentUser,
+        setCreatedByUser
+      );
+      
+      SocketApi.onRenameChannel(dispatch, updateChannel);
       SocketApi.onRemoveChannel(
         dispatch,
         removeChannel,

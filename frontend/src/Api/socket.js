@@ -22,13 +22,23 @@ class SocketApi {
     });
   }
 
-  onNewChannel(dispatch, addChannelAction, t) {
-    this.socket.on('newChannel', (channelName) => {
-      dispatch(addChannelAction(channelName));
+  onNewChannel = (
+    dispatch,
+    addChannelAction,
+    t,
+    currentUserId,
+    setCreatedByUser
+  ) => {
+    dispatch(setCreatedByUser(currentUserId));
+    this.socket.on('newChannel', (channel) => {
+      channel.createdBy = currentUserId;
+      console.log(currentUserId)
+      dispatch(addChannelAction(channel));
       toast.success(t('toast.channel_created_success'));
     });
-  }
-  onRenameChannel(dispatch, renameChannelAction, t) {
+  };
+  
+  onRenameChannel(dispatch, renameChannelAction) {
     this.socket.on('renameChannel', (payload) => {
       dispatch(renameChannelAction(payload));
       toast.success(t('toast.channel_renamed_success'));
