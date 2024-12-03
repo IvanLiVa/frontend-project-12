@@ -32,7 +32,7 @@ const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
       >
         <button
           type="button"
-          className={`w-100 rounded-0 text-start text-truncate btn btn-link ${isActive ? 'active fw-bold text-decoration-underline' : ''}`}
+          className={`w-100 rounded-0 text-start btn ${isActive ? 'btn-secondary' : 'btn-link'}`}
           onClick={() => onClick(channel.id)}
         >
           <span className="me-1">#</span>
