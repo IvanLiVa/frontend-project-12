@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { deleteChannelApi } from '../../Api/channels.js';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const token = useSelector((state) => state.auth.token);
