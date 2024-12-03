@@ -38,7 +38,6 @@ const AddChannelModal = ({ showModal, handleClose }) => {
 
       setIsDuplicate(false);
 
-      // Очистить имя канала от неприемлемых слов
       const filteredName = leoProfanity.clean(name);
 
       try {

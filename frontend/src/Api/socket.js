@@ -24,8 +24,6 @@ class SocketApi {
 
   onNewChannel(dispatch, addChannelAction, t) {
     this.socket.on('newChannel', (channelName) => {
-      console.log('newChannel event triggered');
-      console.log('Translation function:', t);
       dispatch(addChannelAction(channelName));
       toast.success(t('toast.channel_created_success'));
     });

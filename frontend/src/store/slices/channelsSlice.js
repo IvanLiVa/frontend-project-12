@@ -1,7 +1,6 @@
 /* eslint-disable functional/no-expression-statement, no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-
 const initialState = {
   channels: [],
   activeChannelId: '1',
@@ -15,7 +14,9 @@ const channelsSlice = createSlice({
       state.channels = action.payload;
     },
     addChannel: (state, action) => {
-      state.channels.push(action.payload);
+      const newChannel = action.payload;
+      state.channels.push(newChannel);
+      state.activeChannelId = newChannel.id;
     },
     setActiveChannelId: (state, action) => {
       state.activeChannelId = action.payload;
