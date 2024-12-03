@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/authSlice';
 
 const ProtectedRoute = ({ children }) => {
-  const user = JSON.parse(localStorage.getItem('user')); 
+  const user = JSON.parse(localStorage.getItem('user'));
   const dispatch = useDispatch();
 
-  if (!user?.token) {
-    return <Navigate to="/login" />;
-  }
+  useEffect(() => {
+    if (user?.token) {
+      dispatch(setUser(user));
+    }
+  }, [dispatch, user]);
 
-  dispatch(setUser(user));
-  return children;
+  return user?.token ? children : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

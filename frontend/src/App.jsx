@@ -7,6 +7,8 @@ import useConnectSocket from './hooks/useConnectSocket.js';
 import Signup from './pages/signup/Signup.jsx';
 import ProtectedRoute from './pages/ProtectedRoute.jsx';
 import NavbarChat from './components/Chat/navbar.jsx';
+import 'react-toastify/dist/ReactToastify.css';
+import CustomToastContainer from './components/toastContainer.jsx';
 
 const App = () => {
   useConnectSocket();
@@ -26,6 +28,7 @@ const App = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <CustomToastContainer />
     </Router>
   );
 };

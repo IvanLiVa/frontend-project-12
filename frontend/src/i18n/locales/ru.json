@@ -18,7 +18,8 @@
     "passwordPlaceholder": "Введите пароль",
     "confirmPassword": "Подтвердите пароль",
     "confirmPasswordPlaceholder": "Подтвердите пароль",
-    "submit": "Зарегистрироваться"
+    "submit": "Зарегистрироваться",
+    "logout": "Выйти"
   },
   "validation": {
     "username": "Имя должно содержать от 3 до 20 символов",
@@ -34,5 +35,12 @@
     "messageCount": "Сообщений в чате:",
     "newMessagePlaceholder": "Введите сообщение...",
     "sendButton": "Отправить"
+  },
+  "toast": {
+    "error_loading_channels": "Ошибка при загрузке каналов.",
+    "server_connection_lost": "Соединение с сервером потеряно.",
+    "channel_created_success": "Канал был успешно создан!",
+    "channel_renamed_success": "Канал переименован.",
+    "channel_removed_success": "Канал удален."
   }
 }

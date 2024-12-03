@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../../store/slices/authSlice.js';
 import LanguageSwitcher from '../ languageSwitcher.jsx';
+import { useTranslation } from 'react-i18next'; 
 
 const NavbarChat = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
@@ -13,10 +15,6 @@ const NavbarChat = () => {
     dispatch(clearUser());
     localStorage.removeItem('user');
     navigate('/login');
-  };
-
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
   };
 
   return (
@@ -31,7 +29,7 @@ const NavbarChat = () => {
         <div className="d-flex align-items-center ml-auto">
           {user.token && (
             <button className="btn btn-danger me-2" onClick={handleLogout}>
-              Выйти
+              {t('signup.logout')}
             </button>
           )}
           <LanguageSwitcher />

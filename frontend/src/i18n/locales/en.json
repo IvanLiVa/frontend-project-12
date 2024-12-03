@@ -18,7 +18,8 @@
     "passwordPlaceholder": "Enter password",
     "confirmPassword": "Confirm password",
     "confirmPasswordPlaceholder": "Confirm password",
-    "submit": "Sign up"
+    "submit": "Sign up",
+    "logout": "Logout"
   },
   "validation": {
     "username": "Username must be between 3 and 20 characters",
@@ -34,5 +35,12 @@
     "messageCount": "Messages in chat:",
     "newMessagePlaceholder": "Enter a message...",
     "sendButton": "Send"
+  },
+  "toast": {
+    "error_loading_channels": "Error loading channels.",
+    "server_connection_lost": "Connection with server lost.",
+    "channel_created_success": "Channel was successfully created!",
+    "channel_renamed_success": "Channel was renamed.",
+    "channel_removed_success": "Channel was removed."
   }
 }

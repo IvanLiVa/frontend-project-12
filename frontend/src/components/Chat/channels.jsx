@@ -34,16 +34,20 @@ const Channels = () => {
         .then((data) => {
           dispatch(setChannels(data));
         })
-        .catch((error) => console.error('Ошибка загрузки каналов:', error));
+        .catch((error) => {
+          console.error('Ошибка загрузки каналов:', error);
+          toast.error('Ошибка при загрузке каналов.');
+        });
 
-      SocketApi.createConnection();
+      SocketApi.createConnection(t);
 
-      SocketApi.onNewChannel(dispatch, addChannel);
-      SocketApi.onRenameChannel(dispatch, updateChannel);
+      SocketApi.onNewChannel(dispatch, addChannel, t);
+      SocketApi.onRenameChannel(dispatch, updateChannel, t);
       SocketApi.onRemoveChannel(
         dispatch,
         removeChannel,
-        removeMessagesByChannelId
+        removeMessagesByChannelId,
+        t
       );
 
       return () => {
