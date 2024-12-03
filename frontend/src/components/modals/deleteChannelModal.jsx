@@ -1,6 +1,7 @@
 import React from 'react';
 import { deleteChannelApi } from '../../Api/channels.js';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -8,6 +9,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
   const handleDeleteClick = async () => {
     try {
       await deleteChannelApi(channelId, token);
+      toast.success('Канал удалён');
 
       handleClose();
     } catch (error) {
