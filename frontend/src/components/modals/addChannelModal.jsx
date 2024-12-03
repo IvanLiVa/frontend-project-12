@@ -13,8 +13,8 @@ const AddChannelModal = ({ showModal, handleClose }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, 'Имя канала должно содержать минимум 3 символа')
-      .max(20, 'Имя канала не может превышать 20 символов')
+      .min(3, 'От 3 до 20 символов')
+      .max(20, 'От 3 до 20 символов')
       .required('Это поле обязательно'),
   });
 
