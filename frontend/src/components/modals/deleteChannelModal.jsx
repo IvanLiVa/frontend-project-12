@@ -56,7 +56,7 @@ const DeleteChannelModal = ({
                 <button
                   type="button"
                   className="btn btn-danger"
-                  onClick={handleDeleteClick} // Вызываем внутреннюю функцию
+                  onClick={handleDeleteClick} 
                 >
                   Удалить
                 </button>

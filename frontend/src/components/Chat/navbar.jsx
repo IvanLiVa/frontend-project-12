@@ -24,7 +24,7 @@ const NavbarChat = () => {
           className="navbar-brand btn btn-link"
           onClick={() => navigate('/')}
         >
-          Chat
+          Hexlet Chat
         </button>
         <div className="d-flex align-items-center ml-auto">
           {user.token && (

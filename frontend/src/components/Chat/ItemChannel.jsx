@@ -56,16 +56,14 @@ const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
         )}
       </div>
 
-      {/* Модалка для редактирования канала */}
       {showEditModal && (
         <EditChannelModal
           showModal={showEditModal}
           handleClose={closeEditModal}
-          channel={channel} // передаем канал в модалку
+          channel={channel}
         />
       )}
 
-      {/* Модалка для удаления канала */}
       {showDeleteModal && (
         <DeleteChannelModal
           showModal={showDeleteModal}

@@ -1,6 +1,6 @@
 {
   "login": {
-    "usernameLabel": "Имя пользователя",
+    "usernameLabel": "Ваш ник",
     "usernamePlaceholder": "Введите имя пользователя",
     "passwordLabel": "Пароль",
     "passwordPlaceholder": "Введите пароль",
@@ -18,12 +18,12 @@
     "passwordPlaceholder": "Введите пароль",
     "confirmPassword": "Подтвердите пароль",
     "confirmPasswordPlaceholder": "Подтвердите пароль",
-    "submit": "Зарегистрироваться",
+    "submit": "Отправить",
     "logout": "Выйти"
   },
   "validation": {
-    "username": "Имя должно содержать от 3 до 20 символов",
-    "password": "Пароль должен быть не менее 6 символов",
+    "username": "От 3 до 20 символов",
+    "password": "Не менее 6 символов,",
     "passwordMatch": "Пароли должны совпадать",
     "required": "Поле обязательно для заполнения",
     "userExists": "Пользователь с таким логином уже существует.",
@@ -37,10 +37,10 @@
     "sendButton": "Отправить"
   },
   "toast": {
-    "error_loading_channels": "Ошибка при загрузке каналов.",
-    "server_connection_lost": "Соединение с сервером потеряно.",
-    "channel_created_success": "Канал был успешно создан!",
-    "channel_renamed_success": "Канал переименован.",
-    "channel_removed_success": "Канал удален."
+    "error_loading_channels": "Ошибка соединения",
+    "server_connection_lost": "Ошибка соединения",
+    "channel_created_success": "Канал создан",
+    "channel_renamed_success": "Канал переименован",
+    "channel_removed_success": "Канал удалён"
   }
 }
