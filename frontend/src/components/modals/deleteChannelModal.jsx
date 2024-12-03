@@ -44,7 +44,7 @@ const DeleteChannelModal = ({
               ></button>
             </div>
             <div className="modal-body">
-              <p>Вы уверены, что хотите удалить канал "{channelName}"?</p>
+              <p>Уверены ?</p>
               <div className="d-flex justify-content-end">
                 <button
                   type="button"
@@ -56,7 +56,7 @@ const DeleteChannelModal = ({
                 <button
                   type="button"
                   className="btn btn-danger"
-                  onClick={handleDeleteClick} 
+                  onClick={handleDeleteClick}
                 >
                   Удалить
                 </button>
