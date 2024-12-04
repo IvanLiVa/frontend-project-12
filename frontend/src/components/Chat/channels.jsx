@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setChannels,
@@ -26,8 +27,6 @@ const Channels = () => {
   );
   const token = useSelector((state) => state.auth.token);
   const { showModal, openModal, closeModal } = useToggleModal();
-  
-
 
   useEffect(() => {
     if (token) {
@@ -49,7 +48,6 @@ const Channels = () => {
         removeMessagesByChannelId,
         t
       );
-      
       return () => {
         if (SocketApi.socket) {
           SocketApi.socket.disconnect();
@@ -58,14 +56,9 @@ const Channels = () => {
     }
   }, [token, dispatch]);
 
-  
   const handleChannelClick = (id) => {
     dispatch(setActiveChannelId(id));
   };
-
-
-
-
 
   return (
     <>
