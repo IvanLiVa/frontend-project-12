@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import EditChannelModal from '../modals/editChannelModal.jsx';
 import { useToggleModal } from '../../hooks/useAddChannelModal.js';
 import DeleteChannelModal from '../modals/deleteChannelModal.jsx';
 
-const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
+const ItemChannel = ({ channel, isActive, onClick }) => {
+  useEffect(() => {
+    if (channel.removable && !localIsActive) {
+      onClick(channel.id);
+    }
+  }, [channel, localIsActive, onClick]);
+
   const {
     showModal: showEditModal,
     openModal: openEditModal,

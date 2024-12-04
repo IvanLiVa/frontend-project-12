@@ -22,14 +22,9 @@ class SocketApi {
     });
   }
 
-  onNewChannel(dispatch, addChannelAction, t, setActiveChannelId) {
-    this.socket.on('newChannel', (channelName) => {
-      dispatch(addChannelAction(channelName));
-      const currentTabId = sessionStorage.getItem('tabId');
-      const userTabId = localStorage.getItem('isUserTab');
-      if (currentTabId === userTabId) {
-        dispatch(setActiveChannelId(channelName.id));
-      }
+  onNewChannel(dispatch, addChannelAction, t) {
+    this.socket.on('newChannel', (channel) => {
+      dispatch(addChannelAction(channel));
       toast.success(t('toast.channel_created_success'));
     });
   }
