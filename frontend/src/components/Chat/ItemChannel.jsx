@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import EditChannelModal from '../modals/editChannelModal.jsx';
 import { useToggleModal } from '../../hooks/useAddChannelModal.js';
 import DeleteChannelModal from '../modals/deleteChannelModal.jsx';
 
-const ItemChannel = ({ channel, isActive, onClick }) => {
-  useEffect(() => {
-    if (channel.removable && !localIsActive) {
-      onClick(channel.id);
-    }
-  }, [channel, localIsActive, onClick]);
-
+const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
   const {
     showModal: showEditModal,
     openModal: openEditModal,
@@ -38,7 +32,7 @@ const ItemChannel = ({ channel, isActive, onClick }) => {
       >
         <button
           type="button"
-          className={`w-100 rounded-0 text-start text-truncate btn ${isActive ? 'btn-secondary' : ''}`}
+          className={`w-100 rounded-0 text-start btn text-truncate ${isActive ? 'btn-secondary' : ''}`}
           onClick={() => onClick(channel.id)}
         >
           <span className="me-1">#</span>
