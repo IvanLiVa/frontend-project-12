@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { setActiveChannelId } from '../store/slices/channelsSlice.js';
 const api = axios.create({
   baseURL: '/api/v1',
 });
@@ -24,8 +24,10 @@ const request = async (method, url, data = null, token) => {
 
 const getChannels = (token) => request('get', '/channels', null, token);
 
-const addChannelApi = (newChannel, token) =>
-  request('post', '/channels', newChannel, token);
+const addChannelApi = async (newChannel, token, dispatch) => {
+  const channel = await request('post', '/channels', newChannel, token);
+  dispatch(setActiveChannelId(channel.id));
+};
 
 const updateChannelApi = (channelId, updatedChannel, token) =>
   request('patch', `/channels/${channelId}`, updatedChannel, token);

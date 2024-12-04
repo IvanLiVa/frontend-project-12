@@ -4,8 +4,10 @@ import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import { addChannelApi } from '../../Api/channels.js';
 import leoProfanity from 'leo-profanity';
+import { useDispatch } from 'react-redux';
 
 const AddChannelModal = ({ showModal, handleClose }) => {
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const channels = useSelector((state) => state.channels.channels);
 
@@ -41,7 +43,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
       const filteredName = leoProfanity.clean(name);
 
       try {
-        await addChannelApi({ name: filteredName }, token);
+        await addChannelApi({ name: filteredName }, token, dispatch);
         formik.resetForm();
         handleClose();
       } catch (error) {
