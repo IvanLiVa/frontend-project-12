@@ -7,7 +7,6 @@ class SocketApi {
   }
   createConnection(t) {
     this.socket = io();
-   
 
     this.socket.on('connect', () => {
       console.log('connect');
@@ -23,20 +22,26 @@ class SocketApi {
     });
   }
 
-  onNewChannel(dispatch, addChannelAction,t) {
+  onNewChannel(dispatch, addChannelAction, t, setActiveChannelId) {
     this.socket.on('newChannel', (channelName) => {
       dispatch(addChannelAction(channelName));
-      toast.success(t('toast.channel_created_success')); 
-    });
-  }
-  onRenameChannel(dispatch, renameChannelAction,t) {
-    this.socket.on('renameChannel', (payload) => {
-      dispatch(renameChannelAction(payload));
-      toast.success(t('toast.channel_renamed_success')); 
+      const currentTabId = sessionStorage.getItem('tabId');
+      const userTabId = localStorage.getItem('isUserTab');
+      if (currentTabId === userTabId) {
+        dispatch(setActiveChannelId(channelName.id));
+      }
+      toast.success(t('toast.channel_created_success'));
     });
   }
 
-  onRemoveChannel(dispatch, removeChannel, removeMessagesByChannelId,t) {
+  onRenameChannel(dispatch, renameChannelAction, t) {
+    this.socket.on('renameChannel', (payload) => {
+      dispatch(renameChannelAction(payload));
+      toast.success(t('toast.channel_renamed_success'));
+    });
+  }
+
+  onRemoveChannel(dispatch, removeChannel, removeMessagesByChannelId, t) {
     this.socket.on('removeChannel', (payload) => {
       const { id } = payload;
       dispatch(removeChannel(id));

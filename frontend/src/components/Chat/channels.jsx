@@ -25,10 +25,15 @@ const Channels = () => {
     (state) => state.channels.activeChannelId
   );
   const token = useSelector((state) => state.auth.token);
-
   const { showModal, openModal, closeModal } = useToggleModal();
 
   useEffect(() => {
+    sessionStorage.setItem(
+      'tabId',
+      `tab-${Math.random().toString(36).substr(2, 9)}`
+    );
+    localStorage.setItem('isUserTab', sessionStorage.getItem('tabId'));
+    
     if (token) {
       getChannels(token)
         .then((data) => {
@@ -40,8 +45,7 @@ const Channels = () => {
         });
 
       SocketApi.createConnection(t);
-
-      SocketApi.onNewChannel(dispatch, addChannel, t, token);
+      SocketApi.onNewChannel(dispatch, addChannel, t, setActiveChannelId);
       SocketApi.onRenameChannel(dispatch, updateChannel, t);
       SocketApi.onRemoveChannel(
         dispatch,
