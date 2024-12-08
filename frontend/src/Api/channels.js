@@ -17,10 +17,7 @@ const request = async (method, url, token, data = null) => {
     });
     return response.data;
   } catch (error) {
-    console.error(
-      `Ошибка при ${method} запроса на ${url}:`,
-      error.response?.data || error.message
-    );
+    console.error(`Ошибка при ${method} запроса на ${url}:`, error.response?.data || error.message);
     throw error;
   }
 };
@@ -35,7 +32,6 @@ const addChannelApi = async (newChannel, token, dispatch) => {
 const updateChannelApi = (channelId, updatedChannel, token) =>
   request('patch', `/channels/${channelId}`, token, updatedChannel);
 
-const deleteChannelApi = (channelId, token) =>
-  request('delete', `/channels/${channelId}`, token);
+const deleteChannelApi = (channelId, token) => request('delete', `/channels/${channelId}`, token);
 
 export { getChannels, addChannelApi, updateChannelApi, deleteChannelApi };

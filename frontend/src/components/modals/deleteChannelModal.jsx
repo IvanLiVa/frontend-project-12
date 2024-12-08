@@ -39,18 +39,10 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
             <div className="modal-body">
               <p className="lead">Уверены?</p>
               <div className="d-flex justify-content-end">
-                <button
-                  type="button"
-                  className="me-2 btn btn-secondary"
-                  onClick={handleClose}
-                >
+                <button type="button" className="me-2 btn btn-secondary" onClick={handleClose}>
                   Отменить
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={handleDeleteClick}
-                >
+                <button type="button" className="btn btn-danger" onClick={handleDeleteClick}>
                   Удалить
                 </button>
               </div>

@@ -5,16 +5,8 @@ import { useToggleModal } from '../../hooks/useAddChannelModal.js';
 import DeleteChannelModal from '../modals/deleteChannelModal.jsx';
 
 const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
-  const {
-    showModal: showEditModal,
-    openModal: openEditModal,
-    closeModal: closeEditModal,
-  } = useToggleModal();
-  const {
-    showModal: showDeleteModal,
-    openModal: openDeleteModal,
-    closeModal: closeDeleteModal,
-  } = useToggleModal();
+  const { showModal: showEditModal, openModal: openEditModal, closeModal: closeEditModal } = useToggleModal();
+  const { showModal: showDeleteModal, openModal: openDeleteModal, closeModal: closeDeleteModal } = useToggleModal();
 
   const handleEditClick = () => {
     openEditModal();
@@ -26,10 +18,7 @@ const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
 
   return (
     <li className="nav-item">
-      <div
-        role="group"
-        className="d-flex justify-content-between align-items-center"
-      >
+      <div role="group" className="d-flex justify-content-between align-items-center">
         <button
           type="button"
           className={`w-100 rounded-0 text-start text-truncate btn ${isActive ? 'btn-secondary' : ''}`} // Только btn-secondary для активных каналов
@@ -57,13 +46,7 @@ const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
         )}
       </div>
 
-      {showEditModal && (
-        <EditChannelModal
-          showModal={showEditModal}
-          handleClose={closeEditModal}
-          channel={channel}
-        />
-      )}
+      {showEditModal && <EditChannelModal showModal={showEditModal} handleClose={closeEditModal} channel={channel} />}
 
       {showDeleteModal && (
         <DeleteChannelModal

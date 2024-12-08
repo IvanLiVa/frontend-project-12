@@ -8,9 +8,7 @@ const FormChat = () => {
   const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const token = useSelector((state) => state.auth.token);
-  const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId
-  );
+  const activeChannelId = useSelector((state) => state.channels.activeChannelId);
   const username = useSelector((state) => state.auth.username);
 
   const handleSubmit = async (e) => {
@@ -36,11 +34,7 @@ const FormChat = () => {
             placeholder={t('text.newMessagePlaceholder')}
             className="border-2 p-0 ps-2 form-control flex-grow-1"
           />
-          <button
-            type="submit"
-            className="btn btn-outline-primary ms-2"
-            style={{ width: '20%' }}
-          >
+          <button type="submit" className="btn btn-outline-primary ms-2" style={{ width: '20%' }}>
             {t('text.sendButton')}
           </button>
         </div>

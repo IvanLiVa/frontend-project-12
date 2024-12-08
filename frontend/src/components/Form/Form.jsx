@@ -15,10 +15,7 @@ const LoginForm = () => {
   const handleSubmit = (values, { setFieldError }) => {
     fetchDataLogin(values.firstName, values.password)
       .then((data) => {
-        localStorage.setItem(
-          'user',
-          JSON.stringify({ token: data.token, username: data.username })
-        );
+        localStorage.setItem('user', JSON.stringify({ token: data.token, username: data.username }));
         navigate('/');
       })
       .catch((error) => {
@@ -28,10 +25,7 @@ const LoginForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={{ firstName: '', password: '' }}
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={{ firstName: '', password: '' }} onSubmit={handleSubmit}>
       {({ errors }) => (
         <Form className="form p-5 border rounded shadow-sm mt-5">
           <Input
@@ -49,9 +43,7 @@ const LoginForm = () => {
             type="password"
           />
 
-          {errors.general && (
-            <div className="alert alert-danger">{errors.general}</div>
-          )}
+          {errors.general && <div className="alert alert-danger">{errors.general}</div>}
 
           <button type="submit" className="btn btn-primary">
             {t('login.submit')}

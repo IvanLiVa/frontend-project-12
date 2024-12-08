@@ -22,9 +22,7 @@ const SignupForm = () => {
       .min(3, t('validation.username'))
       .max(20, t('validation.username'))
       .required(t('validation.required')),
-    password: Yup.string()
-      .min(6, t('validation.password'))
-      .required(t('validation.required')),
+    password: Yup.string().min(6, t('validation.password')).required(t('validation.required')),
     confirmPass: Yup.string()
       .oneOf([Yup.ref('password'), null], t('validation.passwordMatch'))
       .required(t('validation.required')),
@@ -42,11 +40,7 @@ const SignupForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
       {({ errors }) => (
         <Form className="form p-5 border rounded shadow-sm mt-5">
           <Input
@@ -72,9 +66,7 @@ const SignupForm = () => {
             type="password"
           />
 
-          {errors.general && (
-            <div className="alert alert-danger">{errors.general}</div>
-          )}
+          {errors.general && <div className="alert alert-danger">{errors.general}</div>}
 
           <button type="submit" className="btn btn-primary">
             {t('signup.submit')}

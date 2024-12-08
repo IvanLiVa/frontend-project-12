@@ -14,13 +14,9 @@ const MessageForm = () => {
   const token = useSelector((state) => state.auth.token);
   const messages = useSelector((state) => state.messages.messages);
   const channels = useSelector((state) => state.channels.channels);
-  const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId
-  );
+  const activeChannelId = useSelector((state) => state.channels.activeChannelId);
   const messagesBoxRef = React.useRef(null);
-  const filteredMessages = messages.filter(
-    (message) => message.channelId === activeChannelId
-  );
+  const filteredMessages = messages.filter((message) => message.channelId === activeChannelId);
   const messageCount = filteredMessages.length;
 
   useEffect(() => {
@@ -46,13 +42,9 @@ const MessageForm = () => {
     SocketApi.onNewMessage(dispatch, addMessage);
   }, [dispatch]);
 
-  const activeChannelMessages = messages.filter(
-    (message) => message.channelId === activeChannelId
-  );
+  const activeChannelMessages = messages.filter((message) => message.channelId === activeChannelId);
 
-  const activeChannel = channels.find(
-    (channel) => channel.id === activeChannelId
-  );
+  const activeChannel = channels.find((channel) => channel.id === activeChannelId);
 
   return (
     <div className="col d-flex flex-column">
@@ -65,11 +57,7 @@ const MessageForm = () => {
         </span>
       </div>
 
-      <div
-        id="messages-box"
-        className="chat-messages flex-grow-1 overflow-auto px-5"
-        ref={messagesBoxRef}
-      >
+      <div id="messages-box" className="chat-messages flex-grow-1 overflow-auto px-5" ref={messagesBoxRef}>
         {activeChannelMessages.map((message) => (
           <div key={message.id} className="message">
             <small>

@@ -20,9 +20,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
   const checkDuplicate = (name) => {
     const formattedName = name.trim().toLowerCase();
     const duplicateFound = channels.some(
-      (channelItem) =>
-        channelItem.name.trim().toLowerCase() === formattedName &&
-        channelItem.id !== channel.id
+      (channelItem) => channelItem.name.trim().toLowerCase() === formattedName && channelItem.id !== channel.id
     );
     setIsDuplicate(duplicateFound);
   };
@@ -83,9 +81,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                     id="name"
                     name="name"
                     className={`form-control ${
-                      formik.touched.name && formik.errors.name
-                        ? 'is-invalid'
-                        : ''
+                      formik.touched.name && formik.errors.name ? 'is-invalid' : ''
                     } ${isDuplicate ? 'is-invalid' : ''}`}
                     value={formik.values.name}
                     onChange={(e) => {
@@ -98,25 +94,13 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                   {formik.touched.name && formik.errors.name && (
                     <div className="invalid-feedback">{formik.errors.name}</div>
                   )}
-                  {isDuplicate && (
-                    <div className="invalid-feedback">
-                      Канал с таким именем уже существует.
-                    </div>
-                  )}
+                  {isDuplicate && <div className="invalid-feedback">Канал с таким именем уже существует.</div>}
                 </div>
                 <div className="d-flex justify-content-end">
-                  <button
-                    type="button"
-                    className="btn btn-secondary me-2"
-                    onClick={handleClose}
-                  >
+                  <button type="button" className="btn btn-secondary me-2" onClick={handleClose}>
                     Отменить
                   </button>
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={isDuplicate}
-                  >
+                  <button type="submit" className="btn btn-primary" disabled={isDuplicate}>
                     Сохранить
                   </button>
                 </div>
