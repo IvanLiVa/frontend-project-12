@@ -1,4 +1,4 @@
-/*  eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -60,10 +60,10 @@ const MessageForm = () => {
         <p className="m-0">
           <b>
             #
-            {activeChannel ? 
-            activeChannel.name 
-            : 'Выберите канал'}
-            </b>
+            {activeChannel
+              ? activeChannel.name
+              : 'Выберите канал'}
+          </b>
         </p>
         <span className="text-muted">
           {t('text.messageCount')}
@@ -90,3 +90,4 @@ const MessageForm = () => {
 };
 
 export default MessageForm;
+
