@@ -79,7 +79,8 @@ const MessageForm = () => {
         {activeChannelMessages.map((message) => (
           <div key={message.id} className="message">
             <small>
-              {message.username}:{message.body}
+              {message.username}:
+              {message.body}
             </small>
           </div>
         ))}
@@ -90,4 +91,3 @@ const MessageForm = () => {
 };
 
 export default MessageForm;
-

@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -31,7 +30,9 @@ const channelsSlice = createSlice({
     },
     removeChannel: (state, action) => {
       const channelId = action.payload;
-      state.channels = state.channels.filter((channel) => channel.id !== channelId);
+      state.channels = state.channels.filter(
+        (channel) => channel.id !== channelId
+      );
 
       if (state.activeChannelId === channelId) {
         state.activeChannelId = '1';
