@@ -40,7 +40,11 @@ const SignupForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
       {({ errors }) => (
         <Form className="form p-5 border rounded shadow-sm mt-5">
           <Input

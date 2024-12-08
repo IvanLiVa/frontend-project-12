@@ -29,6 +29,7 @@ const sendMessage = async (messageText, channelId, username, token) => {
     return await addMessageApi(message, token);
   } catch (error) {
     console.error('Ошибка отправки сообщения:', error.message);
+    return null;
   }
 };
 

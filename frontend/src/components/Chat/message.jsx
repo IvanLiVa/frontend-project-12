@@ -57,7 +57,11 @@ const MessageForm = () => {
         </span>
       </div>
 
-      <div id="messages-box" className="chat-messages flex-grow-1 overflow-auto px-5" ref={messagesBoxRef}>
+      <div
+        id="messages-box"
+        className="chat-messages flex-grow-1 overflow-auto px-5"
+        ref={messagesBoxRef}
+      >
         {activeChannelMessages.map((message) => (
           <div key={message.id} className="message">
             <small>

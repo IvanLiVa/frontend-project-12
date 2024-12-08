@@ -5,8 +5,16 @@ import { useToggleModal } from '../../hooks/useAddChannelModal.js';
 import DeleteChannelModal from '../modals/deleteChannelModal.jsx';
 
 const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
-  const { showModal: showEditModal, openModal: openEditModal, closeModal: closeEditModal } = useToggleModal();
-  const { showModal: showDeleteModal, openModal: openDeleteModal, closeModal: closeDeleteModal } = useToggleModal();
+  const {
+    showModal: showEditModal,
+    openModal: openEditModal,
+    closeModal: closeEditModal,
+  } = useToggleModal();
+  const {
+    showModal: showDeleteModal,
+    openModal: openDeleteModal,
+    closeModal: closeDeleteModal,
+  } = useToggleModal();
 
   const handleEditClick = () => {
     openEditModal();
@@ -46,7 +54,13 @@ const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
         )}
       </div>
 
-      {showEditModal && <EditChannelModal showModal={showEditModal} handleClose={closeEditModal} channel={channel} />}
+      {showEditModal && (
+        <EditChannelModal
+          showModal={showEditModal}
+          handleClose={closeEditModal}
+          channel={channel}
+        />
+      )}
 
       {showDeleteModal && (
         <DeleteChannelModal

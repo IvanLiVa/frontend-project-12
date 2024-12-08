@@ -13,7 +13,10 @@ const AddChannelModal = ({ showModal, handleClose }) => {
   const [isDuplicate, setIsDuplicate] = useState(false);
 
   const validationSchema = Yup.object({
-    name: Yup.string().min(3, 'От 3 до 20 символов').max(20, 'От 3 до 20 символов').required('Это поле обязательно'),
+    name: Yup.string()
+      .min(3, 'От 3 до 20 символов')
+      .max(20, 'От 3 до 20 символов')
+      .required('Это поле обязательно'),
   });
 
   const formik = useFormik({
@@ -86,7 +89,8 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                       const name = e.target.value.trim();
 
                       const duplicateFound = channels.some(
-                        (channelItem) => channelItem.name.trim().toLowerCase() === name.toLowerCase()
+                        (channelItem) =>
+                          channelItem.name.trim().toLowerCase() === name.toLowerCase()
                       );
                       setIsDuplicate(duplicateFound);
                     }}
@@ -96,7 +100,9 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                   {formik.touched.name && formik.errors.name && (
                     <div className="invalid-feedback">{formik.errors.name}</div>
                   )}
-                  {isDuplicate && <div className="invalid-feedback">Канал с таким именем уже существует.</div>}
+                  {isDuplicate && (
+                    <div className="invalid-feedback">Канал с таким именем уже существует.</div>
+                  )}
                 </div>
 
                 <div className="d-flex justify-content-end">

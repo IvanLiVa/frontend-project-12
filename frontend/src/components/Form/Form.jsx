@@ -15,7 +15,10 @@ const LoginForm = () => {
   const handleSubmit = (values, { setFieldError }) => {
     fetchDataLogin(values.firstName, values.password)
       .then((data) => {
-        localStorage.setItem('user', JSON.stringify({ token: data.token, username: data.username }));
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ token: data.token, username: data.username })
+        );
         navigate('/');
       })
       .catch((error) => {
