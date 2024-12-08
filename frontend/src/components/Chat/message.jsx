@@ -15,11 +15,11 @@ const MessageForm = () => {
   const messages = useSelector((state) => state.messages.messages);
   const channels = useSelector((state) => state.channels.channels);
   const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId
+    (state) => state.channels.activeChannelId,
   );
   const messagesBoxRef = React.useRef(null);
   const filteredMessages = messages.filter(
-    (message) => message.channelId === activeChannelId
+    (message) => message.channelId === activeChannelId,
   );
   const messageCount = filteredMessages.length;
 
@@ -47,11 +47,11 @@ const MessageForm = () => {
   }, [dispatch]);
 
   const activeChannelMessages = messages.filter(
-    (message) => message.channelId === activeChannelId
+    (message) => message.channelId === activeChannelId,
   );
 
   const activeChannel = channels.find(
-    (channel) => channel.id === activeChannelId
+    (channel) => channel.id === activeChannelId,
   );
 
   return (
@@ -79,7 +79,8 @@ const MessageForm = () => {
         {activeChannelMessages.map((message) => (
           <div key={message.id} className="message">
             <small>
-              {message.username}:
+              {message.username}
+              :
               {message.body}
             </small>
           </div>

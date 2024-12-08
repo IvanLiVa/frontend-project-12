@@ -23,7 +23,7 @@ const NavbarChat = () => {
         <button
           className="navbar-brand btn btn-link"
           onClick={() => navigate('/')}
-          type="button" 
+          type="button"
         >
           Hexlet Chat
         </button>
