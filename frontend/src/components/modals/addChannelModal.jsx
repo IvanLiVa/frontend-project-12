@@ -75,13 +75,13 @@ const AddChannelModal = ({ showModal, handleClose }) => {
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
+                  <label htmlFor="nameAdd" className="form-label">
                     Имя канала
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
+                    id="nameAdd"
+                    name="nameAdd"
                     className={`form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''} ${isDuplicate ? 'is-invalid' : ''}`}
                     value={formik.values.name}
                     onChange={(e) => {
@@ -89,8 +89,8 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                       const name = e.target.value.trim();
 
                       const duplicateFound = channels.some(
-                        (channelItem) => channelItem.name.trim().
-                        toLowerCase() === name.toLowerCase(),
+                        (channelItem) => channelItem.name.trim()
+                         .toLowerCase() === name.toLowerCase(),
                       );
                       setIsDuplicate(duplicateFound);
                     }}
