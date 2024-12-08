@@ -40,17 +40,17 @@ rules:
   react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
   
  
-  prettier/prettier: [
-    "error", 
-    {
-      "semi": true,                    
-      "singleQuote": true,              
-      "trailingComma": "es5",           
-      "tabWidth": 2,                    
-      "useTabs": false,                
-      "bracketSpacing": true,            
-      "jsxBracketSameLine": false,       
-      "printWidth": 80,                  
-      "arrowParens": "always"            
-    }
-  ]
+  # prettier/prettier: [
+  #   "error", 
+  #   {
+  #     "semi": true,                    
+  #     "singleQuote": true,              
+  #     "trailingComma": "es5",           
+  #     "tabWidth": 2,                    
+  #     "useTabs": false,                
+  #     "bracketSpacing": true,            
+  #     "jsxBracketSameLine": false,       
+  #     "printWidth": 80,                  
+  #     "arrowParens": "always"            
+  #   }
+  # ]
