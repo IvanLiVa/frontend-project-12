@@ -32,7 +32,7 @@ const NavbarChat = () => {
             <button
               className="btn btn-outline-primary me-2"
               onClick={handleLogout}
-              type="button" 
+              type="button"
             >
               {t('signup.logout')}
             </button>

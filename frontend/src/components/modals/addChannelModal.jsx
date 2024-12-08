@@ -27,11 +27,11 @@ const AddChannelModal = ({ showModal, handleClose }) => {
     onSubmit: async (values) => {
       const { name } = values;
 
-      const isDuplicate = channels.some(
+      const isChannelDuplicate = channels.some(
         (channelItem) => channelItem.name.trim().toLowerCase() === name.trim().toLowerCase()
       );
-
-      if (isDuplicate) {
+      
+      if (isChannelDuplicate) {
         setIsDuplicate(true);
         return;
       }

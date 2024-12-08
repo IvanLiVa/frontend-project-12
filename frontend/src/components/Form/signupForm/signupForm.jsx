@@ -2,10 +2,10 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Input from '../../Input/Input.jsx';
 import './signupForm.css';
 import { addUser } from '../../../Api/auth.js';
-import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
   firstName: '',

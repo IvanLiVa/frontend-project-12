@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +15,6 @@ import ItemChannel from './ItemChannel';
 import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import { useToggleModal } from '../../hooks/useAddChannelModal';
-import { toast } from 'react-toastify';
 
 const Channels = () => {
   const { t } = useTranslation();
@@ -53,8 +53,6 @@ const Channels = () => {
         }
       };
     }
-
-    return;
   }, [token, dispatch]);
 
   const handleChannelClick = (id) => {

@@ -17,7 +17,7 @@ const LoginForm = () => {
       .then((data) => {
         localStorage.setItem(
           'user',
-          JSON.stringify({ token: data.token, username: data.username })
+          JSON.stringify({ token: data.token, username: data.username }),
         );
         navigate('/');
       })
