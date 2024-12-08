@@ -75,14 +75,13 @@ const AddChannelModal = ({ showModal, handleClose }) => {
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label"  id="name-label">
+                  <label for="name" className="form-label">
                     Имя канала
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
-                    aria-labelledby="name-label"
                     className={`form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''} ${isDuplicate ? 'is-invalid' : ''}`}
                     value={formik.values.name}
                     onChange={(e) => {
