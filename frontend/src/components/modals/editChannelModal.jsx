@@ -73,7 +73,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
-                  <label className="form-label visually-hidden">
+                  <label htmlFor="name" className="form-label visually-hidden">
                     Имя канала
                   </label>
                   <input
