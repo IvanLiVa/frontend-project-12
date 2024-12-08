@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-expression-statement, no-param-reassign */
+/* eslint-disable no-param-reassign */
 
 import { createSlice } from '@reduxjs/toolkit';
 
