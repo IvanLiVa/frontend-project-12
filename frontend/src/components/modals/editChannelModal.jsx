@@ -23,7 +23,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
     const formattedName = name.trim().toLowerCase();
     const duplicateFound = channels.some(
       (channelItem) => channelItem.name.trim()
-      .toLowerCase() === formattedName && channelItem.id !== channel.id,
+        .toLowerCase() === formattedName && channelItem.id !== channel.id,
     );
     setIsDuplicate(duplicateFound);
   };
