@@ -31,8 +31,8 @@ const App = () => {
                 element={
                   (
                     <ProtectedRoute>
-                    <MainLayout />
-                  </ProtectedRoute>
+                      <MainLayout />
+                    </ProtectedRoute>
                   )
                 }
               />
