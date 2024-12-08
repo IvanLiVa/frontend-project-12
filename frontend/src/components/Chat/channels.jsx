@@ -42,7 +42,7 @@ const Channels = () => {
         dispatch,
         removeChannel,
         removeMessagesByChannelId,
-        t
+        t,
       );
 
       return () => {
