@@ -20,12 +20,20 @@ const NavbarChat = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm w-100">
       <div className="container">
-        <button className="navbar-brand btn btn-link" onClick={() => navigate('/')}>
+        <button
+          className="navbar-brand btn btn-link"
+          onClick={() => navigate('/')}
+          type="button" 
+        >
           Hexlet Chat
         </button>
         <div className="d-flex align-items-center ml-auto">
           {user.token && (
-            <button className="btn btn-outline-primary me-2" onClick={handleLogout}>
+            <button
+              className="btn btn-outline-primary me-2"
+              onClick={handleLogout}
+              type="button" 
+            >
               {t('signup.logout')}
             </button>
           )}

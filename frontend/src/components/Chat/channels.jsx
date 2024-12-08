@@ -14,12 +14,15 @@ import ItemChannel from './ItemChannel';
 import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import { useToggleModal } from '../../hooks/useAddChannelModal';
+import { toast } from 'react-toastify';
 
 const Channels = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
-  const activeChannelId = useSelector((state) => state.channels.activeChannelId);
+  const activeChannelId = useSelector(
+    (state) => state.channels.activeChannelId
+  );
   const token = useSelector((state) => state.auth.token);
   const { showModal, openModal, closeModal } = useToggleModal();
 
@@ -37,13 +40,21 @@ const Channels = () => {
       SocketApi.createConnection(t);
       SocketApi.onNewChannel(dispatch, addChannel, t);
       SocketApi.onRenameChannel(dispatch, updateChannel, t);
-      SocketApi.onRemoveChannel(dispatch, removeChannel, removeMessagesByChannelId, t);
+      SocketApi.onRemoveChannel(
+        dispatch,
+        removeChannel,
+        removeMessagesByChannelId,
+        t
+      );
+
       return () => {
         if (SocketApi.socket) {
           SocketApi.socket.disconnect();
         }
       };
     }
+
+    return;
   }, [token, dispatch]);
 
   const handleChannelClick = (id) => {
@@ -55,7 +66,11 @@ const Channels = () => {
       <div className="col-2 bg-light p-3 border-end">
         <div className="d-flex align-items-center mb-3">
           <b className="me-auto">{t('text.channels')}</b>
-          <button type="button" className="btn btn-sm btn-add-channel" onClick={openModal}>
+          <button
+            type="button"
+            className="btn btn-sm btn-add-channel"
+            onClick={openModal}
+          >
             +
           </button>
         </div>
@@ -70,7 +85,9 @@ const Channels = () => {
           ))}
         </ul>
       </div>
-      {showModal && <AddChannelModal showModal={showModal} handleClose={closeModal} />}
+      {showModal && (
+        <AddChannelModal showModal={showModal} handleClose={closeModal} />
+      )}
     </>
   );
 };

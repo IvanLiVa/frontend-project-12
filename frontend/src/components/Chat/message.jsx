@@ -1,12 +1,12 @@
-/*  eslint-disable  functional/no-conditional-statement,  no-param-reassign,functional/no-expression-statement */
+/*  eslint-disable no-param-reassign */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import FormChat from './chatForm.jsx';
 import { setMessages, addMessage } from '../../store/slices/messagesSlice.js';
 import { getMessages } from '../../Api/messages.js';
 import './chat.css';
 import SocketApi from '../../Api/socket.js';
-import { useTranslation } from 'react-i18next';
 
 const MessageForm = () => {
   const { t } = useTranslation();
@@ -14,9 +14,13 @@ const MessageForm = () => {
   const token = useSelector((state) => state.auth.token);
   const messages = useSelector((state) => state.messages.messages);
   const channels = useSelector((state) => state.channels.channels);
-  const activeChannelId = useSelector((state) => state.channels.activeChannelId);
+  const activeChannelId = useSelector(
+    (state) => state.channels.activeChannelId
+  );
   const messagesBoxRef = React.useRef(null);
-  const filteredMessages = messages.filter((message) => message.channelId === activeChannelId);
+  const filteredMessages = messages.filter(
+    (message) => message.channelId === activeChannelId
+  );
   const messageCount = filteredMessages.length;
 
   useEffect(() => {
@@ -42,18 +46,25 @@ const MessageForm = () => {
     SocketApi.onNewMessage(dispatch, addMessage);
   }, [dispatch]);
 
-  const activeChannelMessages = messages.filter((message) => message.channelId === activeChannelId);
+  const activeChannelMessages = messages.filter(
+    (message) => message.channelId === activeChannelId
+  );
 
-  const activeChannel = channels.find((channel) => channel.id === activeChannelId);
+  const activeChannel = channels.find(
+    (channel) => channel.id === activeChannelId
+  );
 
   return (
     <div className="col d-flex flex-column">
       <div className="chat-header bg-light p-3 shadow-sm small">
         <p className="m-0">
-          <b># {activeChannel ? activeChannel.name : 'Выберите канал'}</b>
+          <b>
+            # 
+            {activeChannel ? activeChannel.name : 'Выберите канал'}</b>
         </p>
         <span className="text-muted">
-          {t('text.messageCount')} {messageCount}
+          {t('text.messageCount')} 
+          {messageCount}
         </span>
       </div>
 
@@ -65,7 +76,9 @@ const MessageForm = () => {
         {activeChannelMessages.map((message) => (
           <div key={message.id} className="message">
             <small>
-              {message.username}: {message.body}
+              {message.username}
+              :
+               {message.body}
             </small>
           </div>
         ))}

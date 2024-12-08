@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import MainLayout from './layouts/MainLayout/MainLayout.jsx';
 import './styles/styles.css';
 import Login from './pages/LoginPage/LoginPage.jsx';
-import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import NotFound from './pages/NotFoundPage/NotFoundPage.jsx';
 import useConnectSocket from './hooks/useConnectSocket.js';
 import Signup from './pages/signup/Signup.jsx';
@@ -22,7 +22,6 @@ const App = () => {
   return (
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
-        {' '}
         <Router>
           <div className="d-flex flex-column h-100">
             <NavbarChat />

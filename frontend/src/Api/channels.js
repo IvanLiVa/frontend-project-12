@@ -29,11 +29,12 @@ const addChannelApi = async (newChannel, token, dispatch) => {
   dispatch(setActiveChannelId(channel.id));
 };
 
-const updateChannelApi = (channelId, updatedChannel, token) => request('patch', `/channels/${channelId}`, token, updatedChannel);
+const updateChannelApi = (channelId, updatedChannel, token) => {
+  request('patch', `/channels/${channelId}`, token, updatedChannel);
+};
 
-const deleteChannelApi = (channelId, token) => request('delete', `/channels/${channelId}`, token);
+const deleteChannelApi = (channelId, token) => {
+  request('delete', `/channels/${channelId}`, token);
+};
 
-export { getChannels, 
-  addChannelApi, 
-  updateChannelApi, 
-  deleteChannelApi };
+export { getChannels, addChannelApi, updateChannelApi, deleteChannelApi };

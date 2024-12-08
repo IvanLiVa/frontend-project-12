@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-expression-statement, no-param-reassign */
+/* eslint-disable  no-param-reassign */
 
 import './loginForm.css';
 import React from 'react';
@@ -28,7 +28,10 @@ const LoginForm = () => {
   };
 
   return (
-    <Formik initialValues={{ firstName: '', password: '' }} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={{ firstName: '', password: '' }}
+      onSubmit={handleSubmit}
+    >
       {({ errors }) => (
         <Form className="form p-5 border rounded shadow-sm mt-5">
           <Input
@@ -46,13 +49,17 @@ const LoginForm = () => {
             type="password"
           />
 
-          {errors.general && <div className="alert alert-danger">{errors.general}</div>}
+          {errors.general && (
+            <div className="alert alert-danger">{errors.general}</div>
+          )}
 
           <button type="submit" className="btn btn-primary">
             {t('login.submit')}
           </button>
           <div className="mt-3 text-center">
-            <span>{t('login.noAccount')} </span>
+            <span>
+              {t('login.noAccount')}
+            </span>
             <Link to="/signup" className="text-decoration-none">
               {t('login.signupLink')}
             </Link>
