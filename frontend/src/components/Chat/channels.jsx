@@ -14,19 +14,19 @@ import AddChannelModal from '../modals/addChannelModal.jsx';
 import ItemChannel from './ItemChannel';
 import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
-import { useToggleModal } from '../../hooks/useAddChannelModal';
+import useToggleModal from '../../hooks/useAddChannelModal.js';
 
 const Channels = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
   const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId
+    (state) => state.channels.activeChannelId,
   );
   const token = useSelector((state) => state.auth.token);
   const { showModal, openModal, closeModal } = useToggleModal();
 
-  useEffect(() => {
+  useEffect(function () {
     if (token) {
       getChannels(token)
         .then((data) => {
@@ -36,7 +36,7 @@ const Channels = () => {
           console.error('Ошибка загрузки каналов:', error);
           toast.error('Ошибка при загрузке каналов.');
         });
-
+  
       SocketApi.createConnection(t);
       SocketApi.onNewChannel(dispatch, addChannel, t);
       SocketApi.onRenameChannel(dispatch, updateChannel, t);
@@ -44,9 +44,9 @@ const Channels = () => {
         dispatch,
         removeChannel,
         removeMessagesByChannelId,
-        t
+        t,
       );
-
+  
       return () => {
         if (SocketApi.socket) {
           SocketApi.socket.disconnect();
@@ -54,6 +54,7 @@ const Channels = () => {
       };
     }
   }, [token, dispatch]);
+  
 
   const handleChannelClick = (id) => {
     dispatch(setActiveChannelId(id));

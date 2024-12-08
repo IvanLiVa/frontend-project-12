@@ -16,4 +16,3 @@ const CustomToastContainer = () => (
 );
 
 export default CustomToastContainer;
-

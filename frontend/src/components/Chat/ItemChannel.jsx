@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import EditChannelModal from '../modals/editChannelModal.jsx';
-import { useToggleModal } from '../../hooks/useAddChannelModal.js';
+import useToggleModal from '../../hooks/useAddChannelModal.js';
 import DeleteChannelModal from '../modals/deleteChannelModal.jsx';
 
 const ItemChannel = ({ channel, isActive, onClick }) => {

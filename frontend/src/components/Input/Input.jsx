@@ -3,9 +3,9 @@ import { Field, ErrorMessage } from 'formik';
 import { useTranslation } from 'react-i18next';
 
 const Input = (
-  { 
-    labelKey, name, id, placeholderKey, type = 'text', className, 
-  }
+  {
+    labelKey, name, id, placeholderKey, type = 'text', className,
+  },
 ) => {
   const { t } = useTranslation();
 
