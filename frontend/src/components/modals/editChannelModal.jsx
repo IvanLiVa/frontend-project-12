@@ -22,7 +22,8 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
   const checkDuplicate = (name) => {
     const formattedName = name.trim().toLowerCase();
     const duplicateFound = channels.some(
-      (channelItem) => channelItem.name.trim().toLowerCase() === formattedName && channelItem.id !== channel.id,
+      (channelItem) => channelItem.name.trim()
+      .toLowerCase() === formattedName && channelItem.id !== channel.id,
     );
     setIsDuplicate(duplicateFound);
   };
@@ -91,7 +92,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                       checkDuplicate(e.target.value);
                     }}
                     onBlur={formik.handleBlur}
-                    placeholder="Введите новое название канала"  
+                    placeholder="Введите новое название канала"
                   />
                   {formik.touched.name && formik.errors.name && (
                     <div className="invalid-feedback">{formik.errors.name}</div>

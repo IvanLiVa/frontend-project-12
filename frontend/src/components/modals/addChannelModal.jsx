@@ -92,7 +92,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
 
                       const duplicateFound = channels.some(
                         (channelItem) => channelItem.name.trim()
-                        .toLowerCase() === name.toLowerCase(),
+                         .toLowerCase() === name.toLowerCase(),
                       );
                       setIsDuplicate(duplicateFound);
                     }}
