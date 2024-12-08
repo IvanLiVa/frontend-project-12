@@ -1,4 +1,5 @@
-{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
