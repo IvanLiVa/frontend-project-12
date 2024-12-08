@@ -28,9 +28,9 @@ const AddChannelModal = ({ showModal, handleClose }) => {
       const { name } = values;
 
       const isChannelDuplicate = channels.some(
-        (channelItem) => channelItem.name.trim().toLowerCase() === name.trim().toLowerCase()
+        (channelItem) => channelItem.name.trim().toLowerCase() === name.trim().toLowerCase(),
       );
-      
+
       if (isChannelDuplicate) {
         setIsDuplicate(true);
         return;
@@ -89,8 +89,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                       const name = e.target.value.trim();
 
                       const duplicateFound = channels.some(
-                        (channelItem) =>
-                          channelItem.name.trim().toLowerCase() === name.toLowerCase()
+                        (channelItem) => channelItem.name.trim().toLowerCase() === name.toLowerCase(),
                       );
                       setIsDuplicate(duplicateFound);
                     }}
