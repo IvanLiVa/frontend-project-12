@@ -75,7 +75,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label sr-only">
+                  <label htmlFor="name" className="form-label">
                     Имя канала
                   </label>
                   <input
