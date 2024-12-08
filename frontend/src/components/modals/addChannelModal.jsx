@@ -75,7 +75,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label visually-hidden">
+                  <label htmlFor="name" className="form-label sr-only">
                     Имя канала
                   </label>
                   <input
@@ -89,7 +89,8 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                       const name = e.target.value.trim();
 
                       const duplicateFound = channels.some(
-                        (channelItem) => channelItem.name.trim().toLowerCase() === name.toLowerCase(),
+                        (channelItem) => channelItem.name.trim().
+                        toLowerCase() === name.toLowerCase(),
                       );
                       setIsDuplicate(duplicateFound);
                     }}
