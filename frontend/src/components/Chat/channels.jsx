@@ -26,35 +26,34 @@ const Channels = () => {
   const token = useSelector((state) => state.auth.token);
   const { showModal, openModal, closeModal } = useToggleModal();
 
-  useEffect(function () {
-    if (token) {
-      getChannels(token)
-        .then((data) => {
-          dispatch(setChannels(data));
-        })
-        .catch((error) => {
-          console.error('Ошибка загрузки каналов:', error);
-          toast.error('Ошибка при загрузке каналов.');
-        });
-  
-      SocketApi.createConnection(t);
-      SocketApi.onNewChannel(dispatch, addChannel, t);
-      SocketApi.onRenameChannel(dispatch, updateChannel, t);
-      SocketApi.onRemoveChannel(
-        dispatch,
-        removeChannel,
-        removeMessagesByChannelId,
-        t,
-      );
-  
-      return () => {
-        if (SocketApi.socket) {
-          SocketApi.socket.disconnect();
-        }
-      };
-    }
-  }, [token, dispatch]);
-  
+useEffect(function () {
+  if (token) {
+    getChannels(token)
+      .then((data) => {
+        dispatch(setChannels(data));
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки каналов:', error);
+        toast.error('Ошибка при загрузке каналов.');
+      });
+
+    SocketApi.createConnection(t);
+    SocketApi.onNewChannel(dispatch, addChannel, t);
+    SocketApi.onRenameChannel(dispatch, updateChannel, t);
+    SocketApi.onRemoveChannel(
+      dispatch,
+      removeChannel,
+      removeMessagesByChannelId,
+      t,
+    );
+
+    return () => {
+      if (SocketApi.socket) {
+        SocketApi.socket.disconnect();
+      }
+    };
+  }
+}, [token, dispatch]);
 
   const handleChannelClick = (id) => {
     dispatch(setActiveChannelId(id));
