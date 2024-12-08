@@ -52,7 +52,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
 
   return (
     <>
-      {showModal && <div className="modal-backdrop fade show"></div>}
+      {showModal && <div className="modal-backdrop fade show" />}
       <div
         className={`modal fade ${showModal ? 'show' : ''}`}
         tabIndex="-1"
@@ -70,7 +70,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 onClick={handleClose}
-              ></button>
+              />
             </div>
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { clearUser } from '../../store/slices/authSlice.js';
 import LanguageSwitcher from '../ languageSwitcher.jsx';
-import { useTranslation } from 'react-i18next';
 
 const NavbarChat = () => {
   const { t } = useTranslation();

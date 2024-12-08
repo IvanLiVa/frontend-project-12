@@ -1,12 +1,11 @@
-/*  eslint-disable  functional/no-conditional-statement,  no-param-reassign,functional/no-expression-statement*/
+/*  eslint-disable  functional/no-conditional-statement,  no-param-reassign,functional/no-expression-statement */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FormChat from './chatForm.jsx';
-import { setMessages } from '../../store/slices/messagesSlice.js';
+import { setMessages, addMessage } from '../../store/slices/messagesSlice.js';
 import { getMessages } from '../../Api/messages.js';
 import './chat.css';
 import SocketApi from '../../Api/socket.js';
-import { addMessage } from '../../store/slices/messagesSlice.js';
 import { useTranslation } from 'react-i18next';
 
 const MessageForm = () => {

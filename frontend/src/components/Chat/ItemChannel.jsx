@@ -42,7 +42,7 @@ const ItemChannel = ({ channel, isActive, onClick, onDelete }) => {
         {channel.removable && (
           <Dropdown align="end">
             <Dropdown.Toggle variant="link" id={`dropdown-${channel.id}`}>
-              <i className="bi bi-chevron-down"></i>
+              <i className="bi bi-chevron-down" />
               <span className="visually-hidden">Управление каналом</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>

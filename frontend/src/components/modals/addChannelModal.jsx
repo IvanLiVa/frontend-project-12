@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useSelector } from 'react-redux';
-import { addChannelApi } from '../../Api/channels.js';
+import { useSelector, useDispatch } from 'react-redux';
 import leoProfanity from 'leo-profanity';
-import { useDispatch } from 'react-redux';
+import { addChannelApi } from '../../Api/channels.js';
 
 const AddChannelModal = ({ showModal, handleClose }) => {
   const dispatch = useDispatch();
@@ -54,7 +53,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
 
   return (
     <>
-      {showModal && <div className="modal-backdrop fade show"></div>}
+      {showModal && <div className="modal-backdrop fade show" />}
       <div
         className={`modal fade ${showModal ? 'show' : ''}`}
         tabIndex="-1"
@@ -72,7 +71,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 onClick={handleClose}
-              ></button>
+              />
             </div>
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>

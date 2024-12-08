@@ -1,7 +1,6 @@
 import React from 'react';
-import { deleteChannelApi } from '../../Api/channels.js';
 import { useSelector } from 'react-redux';
-
+import { deleteChannelApi } from '../../Api/channels.js';
 
 const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -17,7 +16,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
 
   return (
     <>
-      {showModal && <div className="modal-backdrop fade show"></div>}
+      {showModal && <div className="modal-backdrop fade show" />}
       <div
         className={`modal fade ${showModal ? 'show' : ''}`}
         tabIndex="-1"
@@ -35,7 +34,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
                 className="btn btn-close"
                 data-bs-dismiss="modal"
                 onClick={handleClose}
-              ></button>
+              />
             </div>
             <div className="modal-body">
               <p className="lead">Уверены?</p>

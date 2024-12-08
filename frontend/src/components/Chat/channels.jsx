@@ -1,22 +1,19 @@
-import React, { useEffect } from 'react';
-import { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   setChannels,
   setActiveChannelId,
+  addChannel,
+  updateChannel,
+  removeChannel,
 } from '../../store/slices/channelsSlice.js';
 import { getChannels } from '../../Api/channels.js';
 import AddChannelModal from '../modals/addChannelModal.jsx';
 import ItemChannel from './ItemChannel';
 import SocketApi from '../../Api/socket.js';
-import {
-  addChannel,
-  updateChannel,
-  removeChannel,
-} from '../../store/slices/channelsSlice.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import { useToggleModal } from '../../hooks/useAddChannelModal';
-import { useTranslation } from 'react-i18next';
 
 const Channels = () => {
   const { t } = useTranslation();

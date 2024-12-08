@@ -7,8 +7,8 @@ extends:
   - plugin:react/recommended
   - plugin:functional/recommended
   - plugin:react-hooks/recommended
-  - "prettier"  
-  - "plugin:prettier/recommended"  
+  - "prettier"
+  - "plugin:prettier/recommended"
 
 parserOptions:
   ecmaFeatures:
@@ -19,7 +19,7 @@ parserOptions:
 plugins:
   - react
   - functional
-  - prettier  
+  - prettier
 
 rules:
   import/extensions: 0
@@ -39,18 +39,18 @@ rules:
   testing-library/no-debug: 0
   react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
   
- 
-  # prettier/prettier: [
-  #   "error", 
-  #   {
-  #     "semi": true,                    
-  #     "singleQuote": true,              
-  #     "trailingComma": "es5",           
-  #     "tabWidth": 2,                    
-  #     "useTabs": false,                
-  #     "bracketSpacing": true,            
-  #     "jsxBracketSameLine": false,       
-  #     "printWidth": 80,                  
-  #     "arrowParens": "always"            
-  #   }
-  # ]
+  # Применение правил для prettier
+  prettier/prettier: [
+    "error",
+    {
+      "semi": true,
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "tabWidth": 2,
+      "useTabs": false,
+      "bracketSpacing": true,
+      "jsxBracketSameLine": false,
+      "printWidth": 80,
+      "arrowParens": "always"
+    }
+  ]

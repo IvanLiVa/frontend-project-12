@@ -1,9 +1,8 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { sendMessage } from '../../Api/messages.js';
 import { useTranslation } from 'react-i18next';
 import leoProfanity from 'leo-profanity';
+import { sendMessage } from '../../Api/messages.js';
 
 const FormChat = () => {
   const { t } = useTranslation();

@@ -3,11 +3,10 @@
 import './loginForm.css';
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Input from '../Input/Input.jsx';
 import { fetchDataLogin } from '../../Api/auth.js';
-import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const navigate = useNavigate();

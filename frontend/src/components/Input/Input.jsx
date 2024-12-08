@@ -2,7 +2,14 @@ import React from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { useTranslation } from 'react-i18next';
 
-const Input = ({ labelKey, name, id, placeholderKey, type = 'text', className }) => {
+const Input = ({
+  labelKey,
+  name,
+  id,
+  placeholderKey,
+  type = 'text',
+  className,
+}) => {
   const { t } = useTranslation();
 
   return (
