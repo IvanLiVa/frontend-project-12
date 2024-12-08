@@ -1,3 +1,4 @@
+{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -75,7 +76,7 @@ const AddChannelModal = ({ showModal, handleClose }) => {
             <div className="modal-body">
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
-                  <label for="name" className="form-label">
+                  <label htmlFor="name" className="visually-hidden">
                     Имя канала
                   </label>
                   <input

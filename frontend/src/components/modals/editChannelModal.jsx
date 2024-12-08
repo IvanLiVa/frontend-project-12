@@ -1,3 +1,4 @@
+{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -89,7 +90,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                       checkDuplicate(e.target.value);
                     }}
                     onBlur={formik.handleBlur}
-                    placeholder="Введите новое название канала"
+                    placeholder="Введите новое название канала"  
                   />
                   {formik.touched.name && formik.errors.name && (
                     <div className="invalid-feedback">{formik.errors.name}</div>
