@@ -51,6 +51,7 @@ const Channels = () => {
         }
       };
     }
+    return undefined;
   }, [token, dispatch, t]);
 
   const handleChannelClick = (id) => {

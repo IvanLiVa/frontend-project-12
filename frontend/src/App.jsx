@@ -29,9 +29,11 @@ const App = () => {
               <Route
                 path="/"
                 element={
+                  (
                   <ProtectedRoute>
                     <MainLayout />
                   </ProtectedRoute>
+                  )
                 }
               />
               <Route path="login" element={<Login />} />
@@ -47,3 +49,4 @@ const App = () => {
 };
 
 export default App;
+
