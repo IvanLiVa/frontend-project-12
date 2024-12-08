@@ -1,4 +1,5 @@
 /* eslint-disable functional/no-expression-statement, no-param-reassign */
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {

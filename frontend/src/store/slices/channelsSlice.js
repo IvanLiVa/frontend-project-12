@@ -1,4 +1,5 @@
-/* eslint-disable functional/no-expression-statement, no-param-reassign */
+/* eslint-disable no-param-reassign */
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -23,9 +24,9 @@ const channelsSlice = createSlice({
     },
     updateChannel: (state, action) => {
       const { id, name } = action.payload;
-      const channel = state.channels.find((channel) => channel.id === id);
-      if (channel) {
-        channel.name = name;
+      const foundChannel = state.channels.find((ch) => ch.id === id);
+      if (foundChannel) {
+        foundChannel.name = name;
       }
     },
     removeChannel: (state, action) => {

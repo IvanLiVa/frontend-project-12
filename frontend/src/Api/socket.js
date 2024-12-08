@@ -5,6 +5,7 @@ class SocketApi {
   constructor() {
     this.socket = null;
   }
+
   createConnection(t) {
     this.socket = io();
 
@@ -16,6 +17,7 @@ class SocketApi {
       toast.error(t('toast.server_connection_lost'));
     });
   }
+
   onNewMessage(dispatch, addMessageAction) {
     this.socket.on('newMessage', (message) => {
       dispatch(addMessageAction(message));

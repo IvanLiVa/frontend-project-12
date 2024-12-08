@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-export const useToggleModal= () => {
-  const [showModal, setShowModal] = useState(false); 
+const useToggleModal = () => {
+  const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => setShowModal(true);  
-  const closeModal = () => setShowModal(false); 
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   return {
     showModal,
@@ -12,3 +12,5 @@ export const useToggleModal= () => {
     closeModal,
   };
 };
+
+export default useToggleModal;

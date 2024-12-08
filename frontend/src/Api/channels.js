@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setActiveChannelId } from '../store/slices/channelsSlice.js';
+
 const api = axios.create({
   baseURL: '/api/v1',
 });
