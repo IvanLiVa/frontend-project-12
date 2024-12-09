@@ -16,12 +16,13 @@ import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import useToggleModal from '../../hooks/useAddChannelModal.js';
 
-
-const Channels = ({onLoadingComplete}) => {
+const Channels = ({ onLoadingComplete }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
-  const activeChannelId = useSelector((state) => state.channels.activeChannelId);
+  const activeChannelId = useSelector(
+    (state) => state.channels.activeChannelId
+  );
   const token = useSelector((state) => state.auth.token);
   const { showModal, openModal, closeModal } = useToggleModal();
 
@@ -44,7 +45,7 @@ const Channels = ({onLoadingComplete}) => {
         dispatch,
         removeChannel,
         removeMessagesByChannelId,
-        t,
+        t
       );
 
       return () => {
@@ -62,7 +63,10 @@ const Channels = ({onLoadingComplete}) => {
 
   return (
     <>
-      <div className="col-2 bg-light p-3 border-end">
+      <div
+        className="col-2 bg-light p-3 border-end"
+        style={{ height: '80vh', overflowY: 'auto' }}
+      >
         <div className="d-flex align-items-center mb-3">
           <b className="me-auto">{t('text.channels')}</b>
           <button
@@ -73,16 +77,21 @@ const Channels = ({onLoadingComplete}) => {
             +
           </button>
         </div>
-        <ul className="nav flex-column">
-          {channels.map((channel) => (
-            <ItemChannel
-              key={channel.id}
-              channel={channel}
-              isActive={activeChannelId === channel.id}
-              onClick={handleChannelClick}
-            />
-          ))}
-        </ul>
+        <div
+          className="overflow-auto"
+          style={{ maxHeight: 'calc(100% - 40px)' }}
+        >
+          <ul className="nav flex-column">
+            {channels.map((channel) => (
+              <ItemChannel
+                key={channel.id}
+                channel={channel}
+                isActive={activeChannelId === channel.id}
+                onClick={handleChannelClick}
+              />
+            ))}
+          </ul>
+        </div>
       </div>
       {showModal && (
         <AddChannelModal showModal={showModal} handleClose={closeModal} />

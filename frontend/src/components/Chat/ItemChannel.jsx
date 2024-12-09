@@ -25,24 +25,23 @@ const ItemChannel = ({ channel, isActive, onClick }) => {
   };
 
   return (
-    <li className="nav-item">
-      <div
-        role="group"
-        className="d-flex justify-content-between align-items-center"
-      >
+    <li className="nav-item w-100">
+      <div role="group" className="d-flex dropdown btn-group w-100">
         <button
           type="button"
-          className={`w-100 rounded-0 text-start text-truncate btn ${isActive ? 'btn-secondary' : ''}`} 
+          className={`w-100 rounded-0 text-start text-truncate btn ${isActive ? 'btn-secondary' : ''}`}
           onClick={() => onClick(channel.id)}
         >
           <span className="me-1">#</span>
-          {channel.name}
+          <span className="channel-name">{channel.name}</span>
         </button>
-
         {channel.removable && (
           <Dropdown align="end">
-            <Dropdown.Toggle variant="link" id={`dropdown-${channel.id}`}>
-              <i className="bi bi-chevron-down" />
+            <Dropdown.Toggle
+              variant="link"
+              id={`dropdown-${channel.id}`}
+              className="flex-grow-0 dropdown-toggle-split btn btn-secondary"
+            >
               <span className="visually-hidden">Управление каналом</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -57,6 +56,7 @@ const ItemChannel = ({ channel, isActive, onClick }) => {
         )}
       </div>
 
+      {/* Модальные окна */}
       {showEditModal && (
         <EditChannelModal
           showModal={showEditModal}

@@ -36,12 +36,14 @@ const MessageForm = ({onLoadingComplete }) => {
         });
     }
   }, [token, dispatch, onLoadingComplete]);
+ 
+
 
   useEffect(() => {
     if (messagesBoxRef.current) {
       messagesBoxRef.current.scrollTop = messagesBoxRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [filteredMessages]); 
 
   useEffect(() => {
     SocketApi.createConnection();

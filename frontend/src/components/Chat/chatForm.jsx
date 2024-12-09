@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect, useRef  } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import leoProfanity from 'leo-profanity';
@@ -10,6 +10,13 @@ const FormChat = () => {
   const token = useSelector((state) => state.auth.token);
   const activeChannelId = useSelector((state) => state.channels.activeChannelId);
   const username = useSelector((state) => state.auth.username);
+  const messageInputRef = useRef(null); 
+
+  useEffect(() => {
+    if (messageInputRef.current) {
+      messageInputRef.current.focus();
+    }
+  }, [activeChannelId]); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +34,7 @@ const FormChat = () => {
       <form className="py-1 border rounded-2" onSubmit={handleSubmit}>
         <div className="d-flex w-100">
           <input
+            ref={messageInputRef} 
             name="body"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
