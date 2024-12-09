@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import FormChat from './chatForm.jsx';
@@ -8,7 +8,7 @@ import { getMessages } from '../../Api/messages.js';
 import './chat.css';
 import SocketApi from '../../Api/socket.js';
 
-const MessageForm = () => {
+const MessageForm = ({onLoadingComplete }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -28,12 +28,14 @@ const MessageForm = () => {
       getMessages(token)
         .then((data) => {
           dispatch(setMessages(data));
+          onLoadingComplete();
+          
         })
         .catch((error) => {
           console.error('Ошибка загрузки сообщений:', error);
         });
     }
-  }, [token, dispatch]);
+  }, [token, dispatch, onLoadingComplete]);
 
   useEffect(() => {
     if (messagesBoxRef.current) {

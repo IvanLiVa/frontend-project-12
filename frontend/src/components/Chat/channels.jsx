@@ -16,7 +16,8 @@ import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import useToggleModal from '../../hooks/useAddChannelModal.js';
 
-const Channels = () => {
+
+const Channels = ({onLoadingComplete}) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
@@ -29,6 +30,7 @@ const Channels = () => {
       getChannels(token)
         .then((data) => {
           dispatch(setChannels(data));
+          onLoadingComplete();
         })
         .catch((error) => {
           console.error('Ошибка загрузки каналов:', error);
