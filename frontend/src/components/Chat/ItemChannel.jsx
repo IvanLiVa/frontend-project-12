@@ -1,12 +1,16 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import useToggleModal from '../../hooks/useAddChannelModal.js';
 import getModal from '../modals/index.js';
-import { useTranslation } from 'react-i18next';
 
 const ItemChannel = ({ channel, isActive, onClick }) => {
   const { t } = useTranslation();
-  const { showModal, openModal, closeModal, modalData, setModalData } =
+  const { showModal, openModal, 
+    closeModal, 
+    modalData, 
+    setModalData } 
+    =
     useToggleModal();
 
   const handleEditClick = () => {

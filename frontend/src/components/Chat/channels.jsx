@@ -9,19 +9,18 @@ import {
   updateChannel,
   removeChannel,
 } from '../../store/slices/channelsSlice.js';
-import { getChannels } from '../../Api/channels.js';
+import { getChannels,addChannelApi } from '../../Api/channels.js';
 import ItemChannel from './ItemChannel';
 import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import getModal from '../modals/index.js';
-import { addChannelApi } from '../../Api/channels.js';
 
 const Channels = ({ onLoadingComplete }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
   const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId
+    (state) => state.channels.activeChannelId,
   );
   const token = useSelector((state) => state.auth.token);
 
@@ -44,7 +43,7 @@ const Channels = ({ onLoadingComplete }) => {
         dispatch,
         removeChannel,
         removeMessagesByChannelId,
-        t
+        t,
       );
 
       return () => {

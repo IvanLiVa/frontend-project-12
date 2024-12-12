@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Modal, FormGroup, FormControl, FormText } from 'react-bootstrap';
+import { 
+  Modal, FormGroup, FormControl, FormText 
+} from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import leoProfanity from 'leo-profanity';
@@ -22,9 +24,8 @@ const AddModal = ({ onClose, onSubmit, channels }) => {
     validationSchema,
     onSubmit: (values) => {
       const channelName = values.name.trim();
-      const isChannelDuplicate = channels.some(
-        (channel) =>
-          channel.name.trim().toLowerCase() === channelName.toLowerCase()
+      const isChannelDuplicate = channels.some((channel) => 
+        channel.name.trim().toLowerCase() === channelName.toLowerCase()
       );
 
       if (isChannelDuplicate) {
@@ -59,6 +60,7 @@ const AddModal = ({ onClose, onSubmit, channels }) => {
         <form onSubmit={formik.handleSubmit}>
           <FormGroup className="form-group mb-3">
             <FormControl
+              id="name"
               ref={inputRef}
               className="form-control"
               data-testid="input-name"
@@ -68,7 +70,7 @@ const AddModal = ({ onClose, onSubmit, channels }) => {
               onChange={handleNameChange}
               placeholder="Введите имя канала"
             />
-            <label class="visually-hidden" for="name">
+            <label className="visually-hidden" htmlFor="name">
               {t('modals.channelName')}
             </label>
             {formik.touched.name && formik.errors.name && (

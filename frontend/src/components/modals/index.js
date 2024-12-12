@@ -1,6 +1,6 @@
-import AddModal from "./addModal.jsx";
-import EditChannelModal from "./editChannelModal.jsx";
-import DeleteChannelModal from "./deleteChannelModal.jsx";
+import AddModal from './addModal.jsx';
+import EditChannelModal from './editChannelModal.jsx';
+import DeleteChannelModal from './deleteChannelModal.jsx';
 
 const modals = {
   adding: AddModal,

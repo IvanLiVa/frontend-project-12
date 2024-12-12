@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { deleteChannelApi } from '../../Api/channels.js';
 import { useTranslation } from 'react-i18next';
+import { deleteChannelApi } from '../../Api/channels.js';
+
 
 const DeleteChannelModal = ({ showModal, handleClose, channel }) => {
   const { t } = useTranslation();
