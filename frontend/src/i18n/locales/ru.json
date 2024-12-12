@@ -42,5 +42,18 @@
     "channel_created_success": "Канал создан",
     "channel_renamed_success": "Канал переименован",
     "channel_removed_success": "Канал удалён"
+  },
+  "modals": {
+    "addChannel": "Добавить канал",
+    "enterChannelName": "Введите имя канала",
+    "fieldRequired": "Это поле обязательно",
+    "channelNameUnique": "Должно быть уникальным",
+    "cancel": "Отменить",
+    "submit": "Отправить",
+    "from3To20Characters": "От 3 до 20 символов",
+    "renameChannel": "Переименовать канал",
+    "deleteChannel": "Удалить канал",
+    "delete": "Удалить",
+    "rename": "Переименовать"
   }
 }

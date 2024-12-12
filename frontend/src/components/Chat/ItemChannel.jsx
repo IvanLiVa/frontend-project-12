@@ -1,28 +1,26 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
-import EditChannelModal from '../modals/editChannelModal.jsx';
 import useToggleModal from '../../hooks/useAddChannelModal.js';
-import DeleteChannelModal from '../modals/deleteChannelModal.jsx';
+import getModal from '../modals/index.js';
+import { useTranslation } from 'react-i18next';
 
 const ItemChannel = ({ channel, isActive, onClick }) => {
-  const {
-    showModal: showEditModal,
-    openModal: openEditModal,
-    closeModal: closeEditModal,
-  } = useToggleModal();
-  const {
-    showModal: showDeleteModal,
-    openModal: openDeleteModal,
-    closeModal: closeDeleteModal,
-  } = useToggleModal();
+  const { t } = useTranslation();
+  const { showModal, openModal, closeModal, modalData, setModalData } =
+    useToggleModal();
 
   const handleEditClick = () => {
-    openEditModal();
+    setModalData({ type: 'edit', channel });
+    openModal();
   };
 
   const handleDeleteClick = () => {
-    openDeleteModal();
+    setModalData({ type: 'delete', channel });
+    console.log(channel);
+    openModal();
   };
+
+  const ModalComponent = modalData ? getModal(modalData.type) : null;
 
   return (
     <li className="nav-item w-100">
@@ -42,35 +40,25 @@ const ItemChannel = ({ channel, isActive, onClick }) => {
               id={`dropdown-${channel.id}`}
               className="flex-grow-0 dropdown-toggle-split btn btn-secondary"
             >
-              <span className="visually-hidden">Управление каналом</span>
+              <span className="visually-hidden">{t('Управление каналом')}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item as="button" onClick={handleDeleteClick}>
-                Удалить
+                {t('modals.delete')}
               </Dropdown.Item>
               <Dropdown.Item as="button" onClick={handleEditClick}>
-                Переименовать
+                {t('modals.rename')}
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         )}
       </div>
 
-      {/* Модальные окна */}
-      {showEditModal && (
-        <EditChannelModal
-          showModal={showEditModal}
-          handleClose={closeEditModal}
-          channel={channel}
-        />
-      )}
-
-      {showDeleteModal && (
-        <DeleteChannelModal
-          showModal={showDeleteModal}
-          handleClose={closeDeleteModal}
-          channelName={channel.name}
-          channelId={channel.id}
+      {ModalComponent && (
+        <ModalComponent
+          showModal={showModal}
+          handleClose={closeModal}
+          channel={modalData.channel}
         />
       )}
     </li>

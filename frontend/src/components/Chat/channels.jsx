@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,11 +10,11 @@ import {
   removeChannel,
 } from '../../store/slices/channelsSlice.js';
 import { getChannels } from '../../Api/channels.js';
-import AddChannelModal from '../modals/addChannelModal.jsx';
 import ItemChannel from './ItemChannel';
 import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
-import useToggleModal from '../../hooks/useAddChannelModal.js';
+import getModal from '../modals/index.js';
+import { addChannelApi } from '../../Api/channels.js';
 
 const Channels = ({ onLoadingComplete }) => {
   const { t } = useTranslation();
@@ -24,7 +24,6 @@ const Channels = ({ onLoadingComplete }) => {
     (state) => state.channels.activeChannelId
   );
   const token = useSelector((state) => state.auth.token);
-  const { showModal, openModal, closeModal } = useToggleModal();
 
   useEffect(() => {
     if (token) {
@@ -60,6 +59,25 @@ const Channels = ({ onLoadingComplete }) => {
   const handleChannelClick = (id) => {
     dispatch(setActiveChannelId(id));
   };
+  const [modal, setModal] = useState(null);
+
+  const handleOpenModal = (modalName) => {
+    setModal({ name: modalName });
+  };
+
+  const handleCloseModal = () => {
+    setModal(null);
+  };
+  const ModalComponent = modal ? getModal(modal.name) : null;
+
+  const handleAddChannel = async (channelName) => {
+    try {
+      await addChannelApi({ name: channelName }, token, dispatch);
+      handleCloseModal();
+    } catch (error) {
+      console.error('Ошибка добавления канала:', error.message);
+    }
+  };
 
   return (
     <>
@@ -72,29 +90,28 @@ const Channels = ({ onLoadingComplete }) => {
           <button
             type="button"
             className="btn btn-sm btn-add-channel"
-            onClick={openModal}
+            onClick={() => handleOpenModal('adding')}
           >
             +
           </button>
         </div>
-        <div
-          className="overflow-auto"
-          style={{ maxHeight: 'calc(100% - 40px)' }}
-        >
-          <ul className="nav flex-column">
-            {channels.map((channel) => (
-              <ItemChannel
-                key={channel.id}
-                channel={channel}
-                isActive={activeChannelId === channel.id}
-                onClick={handleChannelClick}
-              />
-            ))}
-          </ul>
-        </div>
+        <ul className="nav flex-column">
+          {channels.map((channel) => (
+            <ItemChannel
+              key={channel.id}
+              channel={channel}
+              isActive={activeChannelId === channel.id}
+              onClick={handleChannelClick}
+            />
+          ))}
+        </ul>
       </div>
-      {showModal && (
-        <AddChannelModal showModal={showModal} handleClose={closeModal} />
+      {ModalComponent && (
+        <ModalComponent
+          onClose={handleCloseModal}
+          onSubmit={handleAddChannel}
+          channels={channels}
+        />
       )}
     </>
   );

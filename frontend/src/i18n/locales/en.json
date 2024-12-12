@@ -42,5 +42,18 @@
     "channel_created_success": "Channel was successfully created!",
     "channel_renamed_success": "Channel was renamed.",
     "channel_removed_success": "Channel was removed."
+  },
+  "modals": {
+    "addChannel": "Add Channel",
+    "enterChannelName": "Enter channel name",
+    "fieldRequired": "This field is required",
+    "channelNameUnique": "Must be unique",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "from3To20Characters": "From 3 to 20 characters",
+    "renameChannel": "Renamed Channel",
+    "deleteChannel": "Delete Channel",
+    "delete": "delete",
+    "rename": "rename"
   }
 }

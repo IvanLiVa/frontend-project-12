@@ -5,8 +5,12 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import { updateChannelApi } from '../../Api/channels.js';
+import leoProfanity from 'leo-profanity';
+import { useTranslation } from 'react-i18next';
 
 const EditChannelModal = ({ showModal, handleClose, channel }) => {
+  const { t } = useTranslation();
+
   const token = useSelector((state) => state.auth.token);
   const channels = useSelector((state) => state.channels.channels);
 
@@ -14,28 +18,30 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, 'Имя канала должно содержать минимум 3 символа')
-      .max(20, 'Имя канала не может превышать 20 символов')
-      .required('Это поле обязательно'),
+      .min(3, t('modals.from3To20Characters'))
+      .max(20, t('modals.from3To20Characters'))
+      .required(t('modals.fieldRequired')),
   });
 
   const checkDuplicate = (name) => {
     const formattedName = name.trim().toLowerCase();
     const duplicateFound = channels.some(
-      (channelItem) => channelItem.name.trim()
-        .toLowerCase() === formattedName && channelItem.id !== channel.id,
+      (channelItem) =>
+        channelItem.name.trim().toLowerCase() === formattedName &&
+        channelItem.id !== channel.id
     );
     setIsDuplicate(duplicateFound);
   };
 
   const handleFormSubmit = async (values, { resetForm }) => {
+    const filteredName = leoProfanity.clean(values.name);
     if (isDuplicate) {
       alert(`Канал с именем "${values.name}" уже существует.`);
       return;
     }
 
     try {
-      await updateChannelApi(channel.id, { name: values.name }, token);
+      await updateChannelApi(channel.id, { name: filteredName }, token);
       resetForm();
       handleClose();
     } catch (error) {
@@ -64,7 +70,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Переименовать канал</h5>
+              <h5 className="modal-title">{t('modals.renameChannel')}</h5>
               <button
                 type="button"
                 className="btn-close"
@@ -84,7 +90,9 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                     id="name"
                     name="name"
                     className={`form-control ${
-                      formik.touched.name && formik.errors.name ? 'is-invalid' : ''
+                      formik.touched.name && formik.errors.name
+                        ? 'is-invalid'
+                        : ''
                     } ${isDuplicate ? 'is-invalid' : ''}`}
                     value={formik.values.name}
                     onChange={(e) => {
@@ -98,15 +106,25 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                     <div className="invalid-feedback">{formik.errors.name}</div>
                   )}
                   {isDuplicate && (
-                    <div className="invalid-feedback">Канал с таким именем уже существует.</div>
+                    <div className="invalid-feedback">
+                      {t('modals.channelNameUnique')} 
+                    </div>
                   )}
                 </div>
                 <div className="d-flex justify-content-end">
-                  <button type="button" className="btn btn-secondary me-2" onClick={handleClose}>
-                    Отменить
+                  <button
+                    type="button"
+                    className="btn btn-secondary me-2"
+                    onClick={handleClose}
+                  >
+                    {t('modals.cancel')}
                   </button>
-                  <button type="submit" className="btn btn-primary" disabled={isDuplicate}>
-                    Сохранить
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={isDuplicate}
+                  >
+                    {t('modals.submit')}
                   </button>
                 </div>
               </form>

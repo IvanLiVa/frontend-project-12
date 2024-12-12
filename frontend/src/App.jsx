@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CustomToastContainer from './components/toastContainer.jsx';
 
 const rollbarConfig = {
-  accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
+  accessToken: 'aaa72a41996849d0abcead8546323fcb',
   environment: 'production',
 };
 

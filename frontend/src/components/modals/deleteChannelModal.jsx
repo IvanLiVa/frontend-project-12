@@ -1,13 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { deleteChannelApi } from '../../Api/channels.js';
+import { useTranslation } from 'react-i18next';
 
-const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
+const DeleteChannelModal = ({ showModal, handleClose, channel }) => {
+  const { t } = useTranslation();
   const token = useSelector((state) => state.auth.token);
 
   const handleDeleteClick = async () => {
     try {
-      await deleteChannelApi(channelId, token);
+      await deleteChannelApi(channel.id, token);
       handleClose();
     } catch (error) {
       console.error('Ошибка при удалении канала:', error);
@@ -27,7 +29,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <div className="modal-title h4">Удалить канал</div>
+              <div className="modal-title h4">{t('modals.deleteChannel')}</div>
               <button
                 type="button"
                 aria-label="Close"
@@ -39,11 +41,19 @@ const DeleteChannelModal = ({ showModal, handleClose, channelId }) => {
             <div className="modal-body">
               <p className="lead">Уверены?</p>
               <div className="d-flex justify-content-end">
-                <button type="button" className="me-2 btn btn-secondary" onClick={handleClose}>
-                  Отменить
+                <button
+                  type="button"
+                  className="me-2 btn btn-secondary"
+                  onClick={handleClose}
+                >
+                  {t('modals.cancel')}
                 </button>
-                <button type="button" className="btn btn-danger" onClick={handleDeleteClick}>
-                  Удалить
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={handleDeleteClick}
+                >
+                  {t('modals.delete')}
                 </button>
               </div>
             </div>
