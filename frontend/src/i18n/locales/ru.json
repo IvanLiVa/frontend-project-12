@@ -54,6 +54,7 @@
     "renameChannel": "Переименовать канал",
     "deleteChannel": "Удалить канал",
     "delete": "Удалить",
-    "rename": "Переименовать"
+    "rename": "Переименовать",
+    "channelName": "Имя канала"
   }
 }

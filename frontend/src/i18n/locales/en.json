@@ -54,6 +54,7 @@
     "renameChannel": "Renamed Channel",
     "deleteChannel": "Delete Channel",
     "delete": "delete",
-    "rename": "rename"
+    "rename": "rename",
+    "channelName": "Channel name" 
   }
 }

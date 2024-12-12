@@ -6,7 +6,7 @@ import leoProfanity from 'leo-profanity';
 import { useTranslation } from 'react-i18next';
 
 const AddModal = ({ onClose, onSubmit, channels }) => {
-  const { t }  = useTranslation();
+  const { t } = useTranslation();
   const inputRef = useRef();
   const [isDuplicate, setIsDuplicate] = useState(false);
 
@@ -68,6 +68,9 @@ const AddModal = ({ onClose, onSubmit, channels }) => {
               onChange={handleNameChange}
               placeholder="Введите имя канала"
             />
+            <label class="visually-hidden" for="name">
+              {t('modals.channelName')}
+            </label>
             {formik.touched.name && formik.errors.name && (
               <FormText className="text-danger">{formik.errors.name}</FormText>
             )}
