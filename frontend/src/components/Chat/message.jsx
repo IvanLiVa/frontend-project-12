@@ -1,13 +1,14 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FormChat from './chatForm.jsx';
 import { setMessages, addMessage } from '../../store/slices/messagesSlice.js';
 import { getMessages } from '../../Api/messages.js';
 import './chat.css';
 import SocketApi from '../../Api/socket.js';
-import { useNavigate } from 'react-router-dom';
 import { clearUser } from '../../store/slices/authSlice.js';
 
 const MessageForm = ({ onLoadingComplete }) => {
@@ -18,11 +19,11 @@ const MessageForm = ({ onLoadingComplete }) => {
   const messages = useSelector((state) => state.messages.messages);
   const channels = useSelector((state) => state.channels.channels);
   const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId
+    (state) => state.channels.activeChannelId,
   );
   const messagesBoxRef = React.useRef(null);
   const filteredMessages = messages.filter(
-    (message) => message.channelId === activeChannelId
+    (message) => message.channelId === activeChannelId,
   );
   const messageCount = filteredMessages.length;
 
@@ -35,9 +36,9 @@ const MessageForm = ({ onLoadingComplete }) => {
         })
         .catch((error) => {
           if (error.response?.status === 401) {
-            localStorage.removeItem('user'); 
-            dispatch(clearUser()); 
-            navigate('/login', { replace: true }); 
+            localStorage.removeItem('user');
+            dispatch(clearUser());
+            navigate('/login', { replace: true });
           } else {
             console.error('Ошибка при загрузке сообщений:', error);
             toast.error('Ошибка при загрузке сообщений.');
@@ -56,18 +57,20 @@ const MessageForm = ({ onLoadingComplete }) => {
   }, [dispatch]);
 
   const activeChannelMessages = messages.filter(
-    (message) => message.channelId === activeChannelId
+    (message) => message.channelId === activeChannelId,
   );
 
   const activeChannel = channels.find(
-    (channel) => channel.id === activeChannelId
+    (channel) => channel.id === activeChannelId,
   );
 
   return (
     <div className="col d-flex flex-column">
       <div className="chat-header bg-light p-3 shadow-sm small">
         <p className="m-0">
-          <b>#{activeChannel ? activeChannel.name : 'Выберите канал'}</b>
+          <b>
+            # 
+            {activeChannel ? activeChannel.name : 'Выберите канал'}</b>
         </p>
         <span className="text-muted">
           {t('text.messageCount')}
@@ -83,7 +86,9 @@ const MessageForm = ({ onLoadingComplete }) => {
         {activeChannelMessages.map((message) => (
           <div key={message.id} className="message">
             <small>
-              {message.username}:{message.body}
+              {message.username}
+              :
+              {message.body}
             </small>
           </div>
         ))}

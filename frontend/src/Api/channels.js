@@ -6,19 +6,15 @@ const api = axios.create({
 });
 
 const request = async (method, url, token, data = null) => {
-  try {
-    const response = await api({
-      method,
-      url,
-      data,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await api({
+    method,
+    url,
+    data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
 };
 
 const getChannels = (token) => request('get', '/channels', token);
