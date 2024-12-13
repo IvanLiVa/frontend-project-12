@@ -17,16 +17,6 @@ const request = async (method, url, token, data = null) => {
     });
     return response.data;
   } catch (error) {
-    if (error.response?.status === 401) {
-      console.error('Ошибка авторизации. Перенаправление на страницу логина.');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
-    } else {
-      console.error(
-        `Ошибка при ${method} запросе на ${url}:`,
-        error.response?.data || error.message,
-      );
-    }
     throw error;
   }
 };

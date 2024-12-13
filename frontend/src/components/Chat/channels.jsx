@@ -14,13 +14,16 @@ import ItemChannel from './ItemChannel';
 import SocketApi from '../../Api/socket.js';
 import { removeMessagesByChannelId } from '../../store/slices/messagesSlice.js';
 import getModal from '../modals/index.js';
+import { clearUser } from '../../store/slices/authSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const Channels = ({ onLoadingComplete }) => {
+  const navigate = useNavigate()
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
   const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId,
+    (state) => state.channels.activeChannelId
   );
   const token = useSelector((state) => state.auth.token);
 
@@ -32,8 +35,14 @@ const Channels = ({ onLoadingComplete }) => {
           onLoadingComplete();
         })
         .catch((error) => {
-          console.error('Ошибка загрузки каналов:', error);
-          toast.error('Ошибка при загрузке каналов.');
+          if (error.response?.status === 401) {
+            localStorage.removeItem('user');
+            dispatch(clearUser()); 
+            navigate('/login', { replace: true }); 
+          } else {
+            console.error('Ошибка при загрузке каналов:', error);
+            toast.error('Ошибка при загрузке каналов.');
+          }
         });
 
       SocketApi.createConnection(t);
@@ -43,7 +52,7 @@ const Channels = ({ onLoadingComplete }) => {
         dispatch,
         removeChannel,
         removeMessagesByChannelId,
-        t,
+        t
       );
 
       return () => {

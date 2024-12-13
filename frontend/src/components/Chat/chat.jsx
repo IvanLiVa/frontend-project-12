@@ -12,9 +12,9 @@ const Chat = () => {
   };
 
   return (
-    <div className="chat-container d-flex flex-column h-100">
+    <div className="chat-container d-flex flex-column h-100 position-relative">
       {loading && (
-        <div className="spinner-container">
+        <div className="d-flex justify-content-center align-items-center position-absolute top-50 start-50 translate-middle">
           <Spinner animation="border" role="status" />
         </div>
       )}
@@ -27,3 +27,4 @@ const Chat = () => {
 };
 
 export default Chat;
+

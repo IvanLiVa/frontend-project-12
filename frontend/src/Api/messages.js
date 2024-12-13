@@ -5,10 +5,14 @@ const api = axios.create({
 });
 
 const getMessages = async (token) => {
-  const response = await api.get('/messages', {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
+  try {
+    const response = await api.get('/messages', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;  
+  }
 };
 
 const addMessageApi = async (message, token) => {
