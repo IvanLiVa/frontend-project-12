@@ -25,7 +25,7 @@ const AddModal = ({ onClose, onSubmit, channels }) => {
     onSubmit: (values) => {
       const channelName = values.name.trim();
       const isChannelDuplicate = channels.some((channel) => channel.name.trim()
-      .toLowerCase() === channelName.toLowerCase());
+       .toLowerCase() === channelName.toLowerCase());
 
       if (isChannelDuplicate) {
         setIsDuplicate(true);

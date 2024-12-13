@@ -6,16 +6,13 @@ import getModal from '../modals/index.js';
 
 const ItemChannel = ({ channel, isActive, onClick }) => {
   const { t } = useTranslation();
-  const { 
+  const {
     showModal,
     openModal,
     closeModal,
     modalData,
-    setModalData 
-  } 
-    =
-    useToggleModal();
-
+    setModalData,
+  } = useToggleModal();
   const handleEditClick = () => {
     setModalData({ type: 'edit', channel });
     openModal();

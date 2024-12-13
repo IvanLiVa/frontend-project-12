@@ -5,8 +5,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { updateChannelApi } from '../../Api/channels.js';
 import leoProfanity from 'leo-profanity';
+import { updateChannelApi } from '../../Api/channels.js';
 
 const EditChannelModal = ({ showModal, handleClose, channel }) => {
   const { t } = useTranslation();
@@ -26,8 +26,8 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
   const checkDuplicate = (name) => {
     const formattedName = name.trim().toLowerCase();
     const duplicateFound = channels.some(
-      (channelItem) => channelItem.name.trim().toLowerCase() === formattedName &&
-        channelItem.id !== channel.id,
+      (channelItem) => channelItem.name.trim().toLowerCase() === formattedName 
+      && channelItem.id !== channel.id,
     );
     setIsDuplicate(duplicateFound);
   };
