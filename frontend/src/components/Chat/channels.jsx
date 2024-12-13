@@ -23,7 +23,7 @@ const Channels = ({ onLoadingComplete }) => {
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channels.channels);
   const activeChannelId = useSelector(
-    (state) => state.channels.activeChannelId
+    (state) => state.channels.activeChannelId,
   );
   const token = useSelector((state) => state.auth.token);
 

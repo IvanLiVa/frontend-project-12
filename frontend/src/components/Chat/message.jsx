@@ -69,8 +69,9 @@ const MessageForm = ({ onLoadingComplete }) => {
       <div className="chat-header bg-light p-3 shadow-sm small">
         <p className="m-0">
           <b>
-            # 
-            {activeChannel ? activeChannel.name : 'Выберите канал'}</b>
+            #
+            {activeChannel ? activeChannel.name : 'Выберите канал'}
+          </b>
         </p>
         <span className="text-muted">
           {t('text.messageCount')}
