@@ -46,8 +46,9 @@ const deleteChannelApi = (channelId, token) => {
   request('delete', `/channels/${channelId}`, token);
 };
 
-export { getChannels,
+export { 
+  getChannels,
   addChannelApi,
   updateChannelApi,
-  deleteChannelApi 
+  deleteChannelApi,
 };
