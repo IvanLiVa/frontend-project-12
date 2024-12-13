@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { deleteChannelApi } from '../../Api/channels.js';
 
-
 const DeleteChannelModal = ({ showModal, handleClose, channel }) => {
   const { t } = useTranslation();
   const token = useSelector((state) => state.auth.token);

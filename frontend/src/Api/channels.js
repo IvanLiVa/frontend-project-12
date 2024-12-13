@@ -20,11 +20,11 @@ const request = async (method, url, token, data = null) => {
     if (error.response?.status === 401) {
       console.error('Ошибка авторизации. Перенаправление на страницу логина.');
       localStorage.removeItem('user');
-      window.location.href = '/login'; 
+      window.location.href = '/login';
     } else {
       console.error(
         `Ошибка при ${method} запросе на ${url}:`,
-        error.response?.data || error.message
+        error.response?.data || error.message,
       );
     }
     throw error;
@@ -46,4 +46,6 @@ const deleteChannelApi = (channelId, token) => {
   request('delete', `/channels/${channelId}`, token);
 };
 
-export { getChannels, addChannelApi, updateChannelApi, deleteChannelApi };
+export { getChannels, 
+  addChannelApi, updateChannelApi, 
+  deleteChannelApi };

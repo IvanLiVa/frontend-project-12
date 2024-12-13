@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap'; 
+import { Spinner } from 'react-bootstrap';
 import './chat.css';
 import Channels from './channels.jsx';
 import MessageForm from './message.jsx';

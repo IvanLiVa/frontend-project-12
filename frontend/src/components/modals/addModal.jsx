@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Modal, FormGroup, FormControl, FormText 
+import {
+  Modal, FormGroup, FormControl, FormText,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -24,9 +24,8 @@ const AddModal = ({ onClose, onSubmit, channels }) => {
     validationSchema,
     onSubmit: (values) => {
       const channelName = values.name.trim();
-      const isChannelDuplicate = channels.some((channel) => 
-        channel.name.trim().toLowerCase() === channelName.toLowerCase()
-      );
+      const isChannelDuplicate = channels.some((channel) => channel.name.trim()
+      .toLowerCase() === channelName.toLowerCase());
 
       if (isChannelDuplicate) {
         setIsDuplicate(true);
