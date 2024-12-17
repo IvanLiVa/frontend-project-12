@@ -43,9 +43,9 @@ const FormChat = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ 
-          values, handleChange, handleBlur, isSubmitting, errors, touched 
-        })=> (
+        {({
+          values, handleChange, handleBlur, isSubmitting, errors, touched,
+        }) => (
           <Form className="py-1 border rounded-2">
             <div className="d-flex w-100">
               <Field
