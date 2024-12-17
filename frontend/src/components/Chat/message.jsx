@@ -89,7 +89,7 @@ const MessageForm = ({ onLoadingComplete }) => {
             <small>
               {message.username}
               :
-              {message.body}
+              {" " + message.body}
             </small>
           </div>
         ))}
