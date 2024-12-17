@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
@@ -15,6 +15,13 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
   const channels = useSelector((state) => state.channels.channels);
 
   const [isDuplicate, setIsDuplicate] = useState(false);
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (showModal) {
+      inputRef.current?.focus();
+    }
+  }, [])
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -86,6 +93,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
                   </label>
                   <input
                     type="text"
+                    ref={inputRef}
                     id="name"
                     name="name"
                     className={`form-control ${

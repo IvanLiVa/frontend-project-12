@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { deleteChannelApi } from '../../Api/channels.js';
@@ -15,6 +15,14 @@ const DeleteChannelModal = ({ showModal, handleClose, channel }) => {
       console.error('Ошибка при удалении канала:', error);
     }
   };
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (showModal) {
+      inputRef.current?.focus();
+    }
+  }, []);
 
   return (
     <>
@@ -50,6 +58,7 @@ const DeleteChannelModal = ({ showModal, handleClose, channel }) => {
                 </button>
                 <button
                   type="button"
+                  ref={inputRef}
                   className="btn btn-danger"
                   onClick={handleDeleteClick}
                 >
