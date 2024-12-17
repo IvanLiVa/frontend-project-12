@@ -8,7 +8,7 @@ import { sendMessage } from '../../Api/messages.js';
 
 const validationSchema = Yup.object({
   message: Yup.string()
-    .min(1),  
+    .min(1),
 });
 
 const FormChat = () => {
@@ -28,11 +28,11 @@ const FormChat = () => {
     const filteredMessage = leoProfanity.clean(values.message);
     try {
       await sendMessage(filteredMessage, activeChannelId, username, token);
-      resetForm(); 
+      resetForm();
     } catch (error) {
       console.error(error);
     } finally {
-      setSubmitting(false);  
+      setSubmitting(false);
     }
   };
 
@@ -43,7 +43,9 @@ const FormChat = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, handleChange, handleBlur, isSubmitting, errors, touched }) => (
+        {({ 
+          values, handleChange, handleBlur, isSubmitting, errors, touched 
+        })=> (
           <Form className="py-1 border rounded-2">
             <div className="d-flex w-100">
               <Field
