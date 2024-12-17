@@ -21,7 +21,7 @@ const EditChannelModal = ({ showModal, handleClose, channel }) => {
     if (showModal) {
       inputRef.current?.focus();
     }
-  }, [])
+  }, []);
 
   const validationSchema = Yup.object({
     name: Yup.string()
